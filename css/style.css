@@ -69,6 +69,10 @@ h1 {
     margin-left: 100px;
 }
 
+#main {
+    margin-bottom: 100px;
+}
+
 .photographer_section {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
