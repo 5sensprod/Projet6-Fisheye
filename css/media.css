@@ -1,0 +1,54 @@
+.media-photographer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px -10px 0;
+  }
+  
+  .media-item {
+    width: calc(33.33% - 20px);
+    margin: 10px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .media-link {
+    display: block;
+    overflow: hidden;
+  }
+  
+  .media-img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  .media-info {
+    padding: 10px;
+  }
+  
+  .media-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .media-likes {
+    display: flex;
+    align-items: center;
+  }
+  
+  .likes-icon {
+    font-size: 18px;
+    color: red;
+    margin-right: 5px;
+  }
+  
+  .likes-count {
+    font-size: 16px;
+    color: #333;
+  }
