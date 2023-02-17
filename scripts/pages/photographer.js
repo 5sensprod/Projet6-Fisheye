@@ -20,16 +20,16 @@ fetch("https://5sensprod.github.io/Projet6-Fisheye/data/photographers.json")
 
     const nameEl = document.createElement("h2");
     nameEl.textContent = photographer.name;
-    nameEl.classList.add("photographer-name");
     photographerInfo.appendChild(nameEl);
 
     const locationEl = document.createElement("p");
     locationEl.textContent = `${photographer.city}, ${photographer.country}`;
-    locationEl.classList.add("photographer-location");
     photographerInfo.appendChild(locationEl);
 
     const taglineEl = document.createElement("p");
     taglineEl.textContent = photographer.tagline;
-    taglineEl.classList.add("photographer-tagline");
     photographerInfo.appendChild(taglineEl);
+
+    const dailyPriceEl = document.getElementById("daily-price");
+    dailyPriceEl.textContent = photographer.price;
   });

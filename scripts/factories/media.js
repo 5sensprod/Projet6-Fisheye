@@ -57,6 +57,10 @@ function createMedia(id, title, image, likes, date, price, photographerId) {
     return media;
   }
   
+  function getTotalLikes(media) {
+    return media.reduce((totalLikes, m) => totalLikes + m.likes, 0);
+  }
+
   function fetchMedia() {
     const url = new URL(window.location.href);
     const photographerId = url.searchParams.get("id");
@@ -79,6 +83,13 @@ function createMedia(id, title, image, likes, date, price, photographerId) {
           );
           mediaList.appendChild(mediaItem.render());
         });
+  
+        const totalLikes = getTotalLikes(media);
+        const totalLikesEl = document.querySelector("#total-likes");
+        totalLikesEl.innerHTML = `<i class="fas fa-heart"></i> ${totalLikes}`;
+  
+        const dailyPriceEl = document.querySelector("#daily-price");
+        dailyPriceEl.textContent = photographer.price;
       });
   }
   
