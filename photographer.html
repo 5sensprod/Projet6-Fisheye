@@ -14,7 +14,7 @@
 <body>
   <header>
     <img src="assets/images/logo.png" class="logo">
-    
+
   </header>
   <main id="main">
     <div class="photograph-header">
@@ -28,13 +28,14 @@
     <div class="photographer-likes"><span id="total-likes"></span></div>
     <div class="photographer-price"><span id="daily-price"></span>€ / jour</div>
   </div>
-  
-  <div id="contact_modal">
+
+  <div id="contact_modal" role="dialog" aria-label="Formulaire de contact">
     <div class="modal">
-      <header>
+      <div class="header-modal">
         <h2>Contactez-moi</h2>
+        <div id="photographer-name"></div>
         <img src="assets/icons/close.svg" onclick="closeModal()">
-      </header>
+      </div>
       <form>
         <div>
           <label for="lastname">Nom</label>
@@ -43,7 +44,7 @@
         <div>
           <label for="firstname">Prénom</label>
           <input type="text" id="firstname" name="firstname" required>
-        </div>        
+        </div>
         <div>
           <label for="email">Email</label>
           <input type="email" id="email" name="email" required>
@@ -52,7 +53,7 @@
           <label for="message">Message</label>
           <textarea id="message" name="message" required></textarea>
         </div>
-        <button class="contact_button">Envoyer</button>
+        <button class="submit_button" type="submit">Envoyer</button>
       </form>
     </div>
   </div>
