@@ -1,7 +1,6 @@
 function displayModal() {
     const modal = document.getElementById("contact_modal");
     modal.style.display = "block";
-  
     const url = new URL(window.location.href);
     const id = url.searchParams.get("id");
   
@@ -12,6 +11,15 @@ function displayModal() {
   
         const photographerNameDiv = document.getElementById("photographer-name");
         photographerNameDiv.textContent = photographer.name;
+  
+        // Met le focus sur le premier élément du formulaire
+        document.querySelector("#lastname").focus();
+  
+        // Gère l'accessibilité de la modale
+        const modalContainer = document.getElementById("contact_modal");
+        const photographerName = photographer.name;
+        modalContainer.setAttribute("role", "dialog");
+        modalContainer.setAttribute("aria-label", `Formulaire pour contacter ${photographerName}`);
       });
   }
   
