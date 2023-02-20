@@ -118,8 +118,8 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
         const totalLikesEl = document.querySelector("#total-likes");
         totalLikesEl.innerHTML = `<i class="fas fa-heart"></i> ${totalLikes}`;
   
-        const dailyPriceEl = document.querySelector("#daily-price");
-        dailyPriceEl.textContent = photographer.price;
+        // const dailyPriceEl = document.querySelector("#daily-price");
+        // dailyPriceEl.textContent = photographer.price;
       });
   }
   

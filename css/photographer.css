@@ -63,6 +63,10 @@
 }
 
 .modal {
+    position: fixed;
+top: 50%;
+left: 50%;
+translate: -50% -50%;
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
@@ -72,6 +76,7 @@
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    
 }
 
 .modal header {
