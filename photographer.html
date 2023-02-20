@@ -37,8 +37,20 @@
       </header>
       <form>
         <div>
-          <label>Prénom</label>
-          <input>
+          <label for="lastname">Nom</label>
+          <input type="text" id="lastname" name="lastname" required>
+        </div>
+        <div>
+          <label for="firstname">Prénom</label>
+          <input type="text" id="firstname" name="firstname" required>
+        </div>        
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
         </div>
         <button class="contact_button">Envoyer</button>
       </form>
