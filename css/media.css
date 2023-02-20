@@ -1,63 +1,66 @@
 .media-photographer {
   margin-top: 40px;
   display: grid;
-  grid-template-rows: repeat(2, 1fr);
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 15px;
-  }
-  
-  .media-item {
-   width: auto; 
-    /* margin: 10px; */
-    /* background-color: #f7f7f7; */
-  
-    
-  }
-  
-  .media-link {
-    display: block;
-    overflow: hidden;
-  }
-  
-  .media-video,
-  .media-img {
-    width: 350px;
-height: 300px;
--o-object-fit: cover;
-object-fit: cover;
--o-object-position: center;
-object-position: center;
-border-radius: 10px;
-  }
-  
-  .media-info {
-    display: flex;
-justify-content: space-around;
-align-items: center;
-padding: 0 45px;
-    /* width: 96%; */
-  }
-  
-  .media-title {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .media-likes {
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    gap: 3px;
-  }
-  
-  .likes-icon {
-    font-size: 18px;
-    color: red;
-    margin-right: 5px;
-  }
-  
-  .likes-count {
-    font-size: 16px;
-    color: #333;
-  }
+  margin: 0 auto;
+  max-width: 1200px; /* Ajout de la propriété max-width */
+  padding-left: 20px;
+  padding-top: 40px;
+}
+
+.media-item {
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-content: center;
+width: 350px;
+}
+
+.media-link {
+  display: block;
+  overflow: hidden;
+}
+
+.media-video,
+.media-img {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 10px;
+}
+
+.media-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.media-info h2, .media-info .likes-count, .media-info .fa-heart {
+  color: #901C1C;
+}
+
+.media-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.media-likes {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: 3px;
+}
+
+.likes-icon {
+  font-size: 18px;
+  color: red;
+  margin-right: 5px;
+}
+
+.likes-count {
+  font-size: 16px;
+  color: #333;
+}

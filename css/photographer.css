@@ -19,10 +19,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 83px;
-
     color: #D3573C;
-
-
 }
 
 .photographer-location {
@@ -30,8 +27,8 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 31px;
-
     color: #901C1C;
+    margin-bottom: 19px;
 }
 
 .photographer-tagline {
@@ -62,11 +59,25 @@
     border-radius: 50%;
 }
 
+.photographer-footer {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    right: 36px;
+    background-color: #DB8876;
+    color: black;
+    padding: 10px;
+    font-weight: 500;
+    font-size: 24px;
+    border-radius: 5px 5px 0 0;
+    gap: 65px;
+  }
+
 .modal {
     position: fixed;
-top: 50%;
-left: 50%;
-translate: -50% -50%;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
     border-radius: 5px;
     background-color: #DB8876;
     width: 50%;
@@ -76,7 +87,6 @@ translate: -50% -50%;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
-    
 }
 
 .modal header {
