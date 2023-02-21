@@ -134,6 +134,4 @@ function fetchMedia() {
     });
 }
 
-
-
 fetchMedia();
