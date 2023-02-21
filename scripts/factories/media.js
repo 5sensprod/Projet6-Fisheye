@@ -80,6 +80,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
   return media;
 }
 
+
 function getTotalLikes(media) {
   return media.reduce((totalLikes, m) => totalLikes + m.likes, 0);
 }
@@ -132,5 +133,7 @@ function fetchMedia() {
       // dailyPriceEl.textContent = photographer.price;
     });
 }
+
+
 
 fetchMedia();

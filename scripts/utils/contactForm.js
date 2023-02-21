@@ -1,57 +1,40 @@
 function displayModal() {
-    const modal = document.getElementById("contact_modal");
-    const url = new URL(window.location.href);
-    const id = url.searchParams.get("id");
-  
-    fetch("https://5sensprod.github.io/Projet6-Fisheye/data/photographers.json")
-      .then(response => response.json())
-      .then(data => {
-        const photographer = data.photographers.find(p => p.id == id);
-        const photographerNameDiv = document.getElementById("photographer-name");
-        photographerNameDiv.textContent = photographer.name;
-        document.querySelector("#lastname").focus();
-        const modalContainer = document.getElementById("contact_modal");
-        const photographerName = photographer.name;
-        modalContainer.setAttribute("role", "dialog");
-        modalContainer.setAttribute("aria-label", `Formulaire pour contacter ${photographerName}`);
-        modalContainer.setAttribute('aria-modal', 'true');
-  
-        // Désactive la navigation par tabulation pour les éléments en dehors du formulaire
-        const pageContent = document.querySelector('.page-content');
-        const header = document.querySelector('header');
-        const footer = document.querySelector('footer');
-        const nonFormElements = [pageContent, header, footer];
-        nonFormElements.forEach(elem => {
-          for (let child of elem.children) {
-            child.setAttribute('tabindex', '-1');
-          }
-        });
-      });
-  
-    const pageContent = document.querySelector('.page-content');
-    pageContent.classList.add('modal-open');
-    modal.style.display = "block";
+  const modal = document.getElementById("contact_modal");
+  const url = new URL(window.location.href);
+  const id = url.searchParams.get("id");
 
-    
-  }
-  
-  function closeModal() {
-    const modal = document.getElementById("contact_modal");
-    modal.style.display = "none";
-    modal.removeAttribute('aria-modal');
-    const pageContent = document.querySelector('.page-content');
-    pageContent.classList.remove('modal-open');
-  
-    // Réactive la navigation par tabulation pour les éléments en dehors du formulaire
-    const header = document.querySelector('header');
-    const footer = document.querySelector('footer');
-    const nonFormElements = [header, footer];
-    nonFormElements.forEach(elem => {
-      for (let child of elem.children) {
-        child.removeAttribute('tabindex');
-      }
+  fetch("https://5sensprod.github.io/Projet6-Fisheye/data/photographers.json")
+    .then(response => response.json())
+    .then(data => {
+      const photographer = data.photographers.find(p => p.id == id);
+      const photographerNameDiv = document.getElementById("photographer-name");
+      photographerNameDiv.textContent = photographer.name;
+      document.querySelector("#lastname").focus();
+      const modalContainer = document.getElementById("contact_modal");
+      const photographerName = photographer.name;
+      modalContainer.setAttribute("role", "dialog");
+      modalContainer.setAttribute("aria-label", `Formulaire pour contacter ${photographerName}`);
+      modalContainer.setAttribute('aria-hidden', 'false');
+      modalContainer.removeAttribute('aria-modal');
+      modalContainer.removeAttribute('tabindex');
+      modalContainer.querySelectorAll('input').forEach(input => input.removeAttribute('aria-describedby'));
+      modalContainer.querySelectorAll('.error-message').forEach(error => error.textContent = '');
     });
-  }
+
+  const pageContent = document.querySelector('.page-content');
+  pageContent.setAttribute('aria-hidden', 'true');
+  pageContent.classList.add('modal-open');
+  modal.style.display = "block";
+}
+  
+function closeModal() {
+  const modal = document.getElementById("contact_modal");
+  modal.style.display = "none";
+  modal.setAttribute('aria-hidden', 'true');
+  const pageContent = document.querySelector('.page-content');
+  pageContent.removeAttribute('aria-hidden');
+  pageContent.classList.remove('modal-open');
+}
   
   function submitForm(event) {
     event.preventDefault();
