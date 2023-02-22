@@ -186,3 +186,79 @@ textarea:focus {
     font-weight: bold;
     margin-top: 8px;
 }
+
+
+
+/* Style pour la modale */
+
+.modal-lb {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+  }
+  
+  .modal-content {
+    position: relative;
+    margin: auto;
+    padding: 20px;
+    max-width: 800px;
+    max-height: 90%;
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 30px;
+    font-weight: bold;
+    color: #fff;
+    padding: 10px 15px;
+  }
+  
+  /* Style pour la lightbox */
+  
+  .lightbox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .lightbox-title {
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .lightbox-media {
+    max-width: 800px;
+    max-height: 90%;
+  }
+  
+  .lightbox img,
+  .lightbox video {
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+  }
+  
+  .lightbox video {
+    background-color: #000;
+  }
+
+  .lightbox-prev {
+    left: 10px;
+  }
+  
+  .lightbox-next {
+    right: 10px;
+  }

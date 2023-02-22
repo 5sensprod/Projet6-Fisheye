@@ -23,11 +23,21 @@
         <div class="photographer-portrait"></div>
       </div>
       <section class="media-photographer"></section>
-      <div id="lightbox" class="lightbox">
-        <button class="lightbox-close">X</button>
-        <button class="lightbox-prev">&lt;</button>
-        <button class="lightbox-next">&gt;</button>
+      <div class="modal-lb">
+        <div class="modal-content">
+          <button class="modal-close">&times;</button>
+          <button class="lightbox-prev">&lt;</button>
+              <button class="lightbox-next">&gt;</button>
+            </div>
+          <div class="lightbox">
+            <h2 class="lightbox-title"></h2>
+            <div class="lightbox-media">
+              
+          </div>
+        </div>
       </div>
+      
+      
       
     </main>
     <div class="photographer-footer">
@@ -69,7 +79,6 @@
   </div>
   <script src="scripts/pages/photographer.js"></script>
   <script src="scripts/factories/media.js"></script>
-  <script src="scripts/factories/lightbox.js"></script>
   <script src="scripts/utils/contactForm.js"></script>
 </body>
 
