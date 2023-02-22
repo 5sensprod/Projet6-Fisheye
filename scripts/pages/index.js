@@ -1,25 +1,20 @@
-async function getPhotographers() {
-    const response = await fetch("https://5sensprod.github.io/Projet6-Fisheye/data/photographers.json");
-    const data = await response.json();
-    // console.log(data);
-    const photographers = data["photographers"];
-    return photographers;
-}
+// import { getPhotographers } from './data/photographersFetcher.js';
+// import { photographerFactory } from './factories/photographer.js';
 
-async function displayData(photographers) {
-    const photographersSection = document.querySelector(".photographer_section");
+// async function displayData() {
+//   const photographers = await getPhotographers();
 
-    photographers.forEach((photographer) => {
-        const photographerModel = photographerFactory(photographer);
-        const userCardDOM = photographerModel.getUserCardDOM();
-        photographersSection.appendChild(userCardDOM);
-    });
-};
+//   const photographersSection = document.querySelector('.photographer_section');
 
-async function init() {
-    // Récupère les datas des photographes
-    const photographers = await getPhotographers();
-    displayData(photographers);
-};
+//   photographers.forEach((photographer) => {
+//     const photographerModel = photographerFactory(photographer);
+//     const userCardDOM = photographerModel.getUserCardDOM();
+//     photographersSection.appendChild(userCardDOM);
+//   });
+// }
 
-init();
+// async function init() {
+//   displayData();
+// }
+
+// init();

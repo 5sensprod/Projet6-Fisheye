@@ -19,30 +19,30 @@
     <main id="main">
       <div class="photograph-header">
         <div id="photographer-info"></div>
-        <button class="contact_button" onclick="displayModal()">Contactez-moi</button>
-        <div class="photographer-portrait"></div>
+        <button class="contact_button">Contactez-moi</button>
+        <div class="photographer-portrait">
+
+        </div>
       </div>
       <section class="media-photographer"></section>
       <div class="modal-lb">
         <div class="modal-content">
           <button class="modal-close">&times;</button>
           <button class="lightbox-prev">&lt;</button>
-              <button class="lightbox-next">&gt;</button>
-            </div>
-          <div class="lightbox">
-            <h2 class="lightbox-title"></h2>
-            <div class="lightbox-media">
-              
+          <button class="lightbox-next">&gt;</button>
+        </div>
+        <div class="lightbox">
+          <h2 class="lightbox-title"></h2>
+          <div class="lightbox-media">
+
           </div>
         </div>
       </div>
-      
-      
-      
+
     </main>
     <div class="photographer-footer">
       <div class="photographer-likes"><span id="total-likes"></span></div>
-      <div class="photographer-price"><span id="daily-price"></span>€ / jour</div>
+      <div class="photographer-price"><span id="daily-price"></span></div>
     </div>
   </div>
   <div id="contact_modal">
@@ -50,7 +50,7 @@
       <div class="header-modal">
         <h2>Contactez-moi</h2>
         <div id="photographer-name"></div>
-        <img src="assets/icons/close.svg" onclick="closeModal()" tabindex="6">
+        <img src="assets/icons/close.svg" id="close_modal_button" tabindex="6">
       </div>
       <form>
         <div>
@@ -77,9 +77,10 @@
       </form>
     </div>
   </div>
-  <script src="scripts/pages/photographer.js"></script>
+  <script src="scripts/pages/photographer.js" type="module"></script>
+  <script src="scripts/data/photographersFetcher.js" type="module"></script>
   <script src="scripts/factories/media.js"></script>
-  <script src="scripts/utils/contactForm.js"></script>
+  <script src="scripts/utils/contactForm.js" type="module"></script>
 </body>
 
 </html>
