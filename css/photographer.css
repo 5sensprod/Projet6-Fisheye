@@ -98,19 +98,16 @@
 
 .header-modal img {
     position: absolute;
-    top: 25px;
-    right: 5px;
+    top: 0;
+    right: 0;
+    width: 30px;
 }
 
-.header-modal h2 {
+.header-modal h2, #photographer-name {
     font-weight: 400;
-    font-size: 64px;
+    font-size: 38px;
 }
 
-#photographer-name {
-    font-weight: 400;
-    font-size: 64px;
-}
 
 .modal header {
     justify-content: space-between;
@@ -136,7 +133,7 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 36px;
+    font-size: 28px;
 }
 
 form div {
