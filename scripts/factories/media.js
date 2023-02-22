@@ -80,6 +80,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
 
     const likesIcon = document.createElement("i");
     likesIcon.classList.add("fas", "fa-heart");
+    let isLiked = false;
 
     const likesCount = document.createElement("span");
     likesCount.classList.add("likes-count");
@@ -90,6 +91,18 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
 
     mediaInfo.appendChild(mediaTitle);
     mediaInfo.appendChild(mediaLikes);
+
+    likesIcon.addEventListener("click", function() {
+      if (!isLiked) {
+        likesCount.textContent = parseInt(likesCount.textContent) + 1;
+        likesIcon.classList.add("liked");
+        isLiked = true;
+      } else {
+        likesCount.textContent = parseInt(likesCount.textContent) - 1;
+        likesIcon.classList.remove("liked");
+        isLiked = false;
+      }
+    });
 
     mediaItem.appendChild(mediaInfo);
 
@@ -127,11 +140,18 @@ function createMediaFromData(data, photographerId) {
   }
 }
 
+
 //Calcule le nombre total de likes pour tous les médias
 function getTotalLikes(media) {
-  return media.reduce((totalLikes, m) => totalLikes + m.likes, 0);
+  let totalLikes = 0;
+  media.forEach(m => {
+    totalLikes += m.likes;
+    if (m.isLiked) {
+      totalLikes += 1;
+    }
+  });
+  return totalLikes;
 }
-
 //Récupère les données de médias pour le photographe actuel et les affiche
 function fetchMedia() {
   const url = new URL(window.location.href);
