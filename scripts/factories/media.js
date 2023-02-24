@@ -1,6 +1,7 @@
 const mediaUrl = 'assets/medias';
 const imageType = 'image';
 const videoType = 'video';
+let totalLikes = 0;
 
 //Crée un objet media à partir des paramètres fournis
 function createMedia(id, title, image, likes, date, price, photographerId, type) {
@@ -18,6 +19,8 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
   media.render = function () {
     const mediaItem = document.createElement("article");
     mediaItem.classList.add("media-item");
+
+
 
     const mediaLink = document.createElement("a");
     mediaLink.classList.add("media-link");
@@ -62,7 +65,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
     mediaItem.appendChild(mediaLink);
 
     if (this.type === videoType) {
-      mediaContent.addEventListener('click', function(e) {
+      mediaContent.addEventListener('click', function (e) {
         e.preventDefault();
         showLightbox(media);
       });
@@ -92,15 +95,19 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
     mediaInfo.appendChild(mediaTitle);
     mediaInfo.appendChild(mediaLikes);
 
-    likesIcon.addEventListener("click", function() {
+    likesIcon.addEventListener("click", function () {
       if (!isLiked) {
         likesCount.textContent = parseInt(likesCount.textContent) + 1;
         likesIcon.classList.add("liked");
         isLiked = true;
+        totalLikes++; //incrémente le total de likes
+        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`; //met à jour l'affichage du total des likes
       } else {
         likesCount.textContent = parseInt(likesCount.textContent) - 1;
         likesIcon.classList.remove("liked");
         isLiked = false;
+        totalLikes--; //décrémente le total de likes
+        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`; //met à jour l'affichage du total des likes
       }
     });
 
@@ -114,7 +121,18 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
 
 //Crée un média à partir des données récupérées en fonction du type de media
 function createMediaFromData(data, photographerId) {
-  if (data.video) {
+  const type = getMediaType(data);
+  return createMediaFromType(data, photographerId, type);
+}
+
+// Renvoie le type de média (image ou vidéo) à partir des données du média
+function getMediaType(data) {
+  return data.video ? videoType : imageType;
+}
+
+// Crée un média en fonction de son type
+function createMediaFromType(data, photographerId, type) {
+  if (type === videoType) {
     return createMedia(
       data.id,
       data.title,
@@ -140,10 +158,9 @@ function createMediaFromData(data, photographerId) {
   }
 }
 
-
 //Calcule le nombre total de likes pour tous les médias
 function getTotalLikes(media) {
-  let totalLikes = 0;
+
   media.forEach(m => {
     totalLikes += m.likes;
     if (m.isLiked) {
@@ -152,6 +169,8 @@ function getTotalLikes(media) {
   });
   return totalLikes;
 }
+
+const totalLikesEl = document.querySelector("#total-likes");
 //Récupère les données de médias pour le photographe actuel et les affiche
 function fetchMedia() {
   const url = new URL(window.location.href);
@@ -170,7 +189,7 @@ function fetchMedia() {
       });
 
       const totalLikes = getTotalLikes(media);
-      const totalLikesEl = document.querySelector("#total-likes");
+
       totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
     });
 }
@@ -205,13 +224,13 @@ function showLightbox(media) {
     } else {
       currentIndex = 0;
     }
-  
+
     const nextMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
-  
+
     if (nextMedia.tagName.toLowerCase() === "video") {
       nextMedia.controls = true;
     }
-  
+
     lightboxContent.innerHTML = "";
     lightboxContent.appendChild(nextMedia);
     const nextMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
@@ -225,13 +244,13 @@ function showLightbox(media) {
     } else {
       currentIndex = mediaList.length - 1;
     }
-  
+
     const prevMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
-  
+
     if (prevMedia.tagName.toLowerCase() === "video") {
       prevMedia.controls = true;
     }
-  
+
     lightboxContent.innerHTML = "";
     lightboxContent.appendChild(prevMedia);
     const prevMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
@@ -253,43 +272,42 @@ function showLightbox(media) {
     description.setAttribute("src", `${mediaUrl}/${media.photographerId}/${media.description}`);
     description.setAttribute("type", "audio/mpeg");
     lightboxVideo.appendChild(description);
-} else if (media.type === imageType) {
+  } else if (media.type === imageType) {
     const lightboxImg = document.createElement("img");
     lightboxImg.setAttribute("src", `${mediaUrl}/${media.photographerId}/${media.image}`);
     lightboxImg.setAttribute("alt", media.title);
     lightboxContent.innerHTML = "";
     lightboxContent.appendChild(lightboxImg);
-}
+  }
 
   // Affiche le titre du média actuel
   lightboxTitle.textContent = media.title;
 
   // Affiche la lightbox
   lightbox.style.display = "block";
-  
-// Ferme la lightbox quand l'utilisateur clique sur le bouton de fermeture
-const closeButton = document.querySelector(".modal-close");
-closeButton.addEventListener("click", function (e) {
-  if (e.target === closeButton) {
-    lightbox.style.display = "none";
-  }
-});
 
-// Ferme la lightbox quand l'utilisateur clique en dehors de la lightbox
-lightbox.addEventListener("click", function (e) {
-  if (e.target === lightbox) {
-    lightbox.style.display = "none";
-  }
-});
+  // Ferme la lightbox quand l'utilisateur clique sur le bouton de fermeture
+  const closeButton = document.querySelector(".modal-close");
+  closeButton.addEventListener("click", function (e) {
+    if (e.target === closeButton) {
+      lightbox.style.display = "none";
+    }
+  });
 
-// Affiche le média suivant quand l'utilisateur clique sur le bouton suivant
-lightboxNext.addEventListener("click", function (e) {
-showNextMedia();
-});
+  // Ferme la lightbox quand l'utilisateur clique en dehors de la lightbox
+  lightbox.addEventListener("click", function (e) {
+    if (e.target === lightbox) {
+      lightbox.style.display = "none";
+    }
+  });
 
-// Affiche le média précédent quand l'utilisateur clique sur le bouton précédent
-lightboxPrev.addEventListener("click", function (e) {
-showPrevMedia();
-});
+  // Affiche le média suivant quand l'utilisateur clique sur le bouton suivant
+  lightboxNext.addEventListener("click", function (e) {
+    showNextMedia();
+  });
+
+  // Affiche le média précédent quand l'utilisateur clique sur le bouton précédent
+  lightboxPrev.addEventListener("click", function (e) {
+    showPrevMedia();
+  });
 }
-  
