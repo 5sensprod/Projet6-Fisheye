@@ -10,3 +10,9 @@ export async function getPhotographerById(id) {
   const photographer = photographers.find(p => p.id == id);
   return photographer;
 }
+
+export const getMedia = async () => {
+  const response = await fetch("https://5sensprod.github.io/Projet6-Fisheye/data/media.json");
+  const data = await response.json();
+  return data.media;
+};

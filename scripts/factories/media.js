@@ -1,4 +1,5 @@
 import { showLightbox } from '../utils/lightbox.js';
+import mediaSorter from '../utils/mediaSorter.js';
 
 const mediaUrl = 'assets/medias';
 const imageType = 'image';
@@ -181,10 +182,15 @@ function fetchMedia() {
   fetch("https://5sensprod.github.io/Projet6-Fisheye/data/photographers.json")
     .then((response) => response.json())
     .then((data) => {
-      const photographerData = data.photographers.find(p => p.id == photographerId);
-      const media = data.media.filter((m) => m.photographerId == photographerId).map(m => createMediaFromData(m, photographerId));
+      const photographerData = data.photographers.find((p) => p.id == photographerId);
+      const media = data.media
+        .filter((m) => m.photographerId == photographerId)
+        .map((m) => createMediaFromData(m, photographerId));
+
       const mediaList = document.querySelector(".media-photographer");
 
+      // Tri des médias par popularité (nombre de likes décroissant)
+      media.sort((a, b) => b.likes - a.likes);
 
       media.forEach((m) => {
         mediaList.appendChild(m.render());
@@ -195,4 +201,5 @@ function fetchMedia() {
       totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
     });
 }
+
 fetchMedia();
