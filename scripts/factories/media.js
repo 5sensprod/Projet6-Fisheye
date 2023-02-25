@@ -1,67 +1,47 @@
 import { showLightbox } from '../utils/lightbox.js';
-import mediaSorter from '../utils/mediaSorter.js';
 
 const mediaUrl = 'assets/medias';
 const imageType = 'image';
 const videoType = 'video';
 let totalLikes = 0;
+const totalLikesEl = document.querySelector("#total-likes");
 
 //Crée un objet media à partir des paramètres fournis
 function createMedia(id, title, image, likes, date, price, photographerId, type) {
-  const media = {};
-
-  media.id = id;
-  media.title = title;
-  media.image = image;
-  media.likes = likes;
-  media.date = date;
-  media.price = price;
-  media.photographerId = photographerId;
-  media.type = type;
+  const media = {
+    id,
+    title,
+    image,
+    likes,
+    date,
+    price,
+    photographerId,
+    type,
+  };
 
   media.render = function () {
     const mediaItem = document.createElement("article");
     mediaItem.classList.add("media-item");
 
+    const mediaLink = createMediaLink(this);
 
-
-    const mediaLink = document.createElement("a");
-    mediaLink.classList.add("media-link");
-    mediaLink.setAttribute("href", `${mediaUrl}/${this.photographerId}/${this.image}`);
-    mediaLink.setAttribute("data-lightbox", "gallery");
-    mediaLink.setAttribute("data-title", this.title);
-    mediaLink.setAttribute("aria-label", `Image nommée ${this.title}`);
-
-    // Ajout de l'écouteur d'événement de clic sur le lien
-    mediaLink.addEventListener('click', function (e) {
-      e.preventDefault(); // empêche le comportement par défaut du lien
-      showLightbox(media);
-    });
-
-    let mediaContent;
+    let mediaContent = this.type === imageType
+      ? document.createElement("img")
+      : document.createElement("video");
 
     if (this.type === imageType) {
-      const mediaImg = document.createElement("img");
-      mediaImg.classList.add("media-img");
-      mediaImg.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
-      mediaImg.setAttribute("alt", this.title);
-      mediaContent = mediaImg;
-
+      mediaContent.classList.add("media-img");
+      mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
+      mediaContent.setAttribute("alt", this.title);
     } else if (this.type === videoType) {
-      const mediaVideo = document.createElement("video");
-      mediaVideo.classList.add("media-video");
-      mediaVideo.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
-      mediaVideo.setAttribute("alt", this.title);
-      // mediaVideo.setAttribute("controls", "");
+      mediaContent.classList.add("media-video");
+      mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
+      mediaContent.setAttribute("alt", this.title);
 
-      // ajout description video pour l'accessibilité
       const description = document.createElement("source");
       description.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.description}`);
       description.setAttribute("type", "audio/mpeg");
-      mediaVideo.appendChild(description);
-
-      mediaContent = mediaVideo;
-
+      mediaContent.appendChild(description);
     }
 
     mediaLink.appendChild(mediaContent);
@@ -99,28 +79,59 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
     mediaInfo.appendChild(mediaLikes);
 
     likesIcon.addEventListener("click", function () {
-      if (!isLiked) {
-        likesCount.textContent = parseInt(likesCount.textContent) + 1;
-        likesIcon.classList.add("liked");
-        isLiked = true;
-        totalLikes++; //incrémente le total de likes
-        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`; //met à jour l'affichage du total des likes
-      } else {
-        likesCount.textContent = parseInt(likesCount.textContent) - 1;
-        likesIcon.classList.remove("liked");
-        isLiked = false;
-        totalLikes--; //décrémente le total de likes
-        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`; //met à jour l'affichage du total des likes
-      }
+      isLiked ? (
+        likesCount.textContent = parseInt(likesCount.textContent) - 1,
+        likesIcon.classList.remove("liked"),
+        isLiked = false,
+        totalLikes--,
+        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`
+      ) : (
+        likesCount.textContent = parseInt(likesCount.textContent) + 1,
+        likesIcon.classList.add("liked"),
+        isLiked = true,
+        totalLikes++,
+        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`
+      );
     });
 
     mediaItem.appendChild(mediaInfo);
 
     return mediaItem;
   };
-
   return media;
 }
+function createMediaLink(media) {
+  const mediaLink = document.createElement("a");
+  mediaLink.classList.add("media-link");
+  mediaLink.setAttribute("href", `${mediaUrl}/${media.photographerId}/${media.image}`);
+  mediaLink.setAttribute("data-lightbox", "gallery");
+  mediaLink.setAttribute("data-title", media.title);
+  mediaLink.setAttribute("aria-label", `Image nommée ${media.title}`);
+
+  // Ajout de l'écouteur d'événement de clic sur le lien
+  mediaLink.addEventListener('click', function (e) {
+    e.preventDefault(); // empêche le comportement par défaut du lien
+    showLightbox(media);
+  });
+
+  return mediaLink;
+}
+
+
+
+
+
+//Calcule le nombre total de likes pour tous les médias
+function getTotalLikes(media) {
+  media.forEach(m => {
+    totalLikes += m.likes;
+    if (m.isLiked) {
+      totalLikes += 1;
+    }
+  });
+  return totalLikes;
+}
+
 
 //Crée un média à partir des données récupérées en fonction du type de media
 function createMediaFromData(data, photographerId) {
@@ -135,71 +146,54 @@ function getMediaType(data) {
 
 // Crée un média en fonction de son type
 function createMediaFromType(data, photographerId, type) {
-  if (type === videoType) {
-    return createMedia(
-      data.id,
-      data.title,
-      data.video,
-      data.likes,
-      data.date,
-      data.price,
-      photographerId,
-      videoType,
-      data.description
-    );
-  } else {
-    return createMedia(
-      data.id,
-      data.title,
-      data.image,
-      data.likes,
-      data.date,
-      data.price,
-      photographerId,
-      imageType
-    );
-  }
+  return type === videoType
+    ? createMedia(data.id, data.title, data.video, data.likes, data.date, data.price, photographerId, videoType, data.description)
+    : createMedia(data.id, data.title, data.image, data.likes, data.date, data.price, photographerId, imageType);
 }
 
-//Calcule le nombre total de likes pour tous les médias
-function getTotalLikes(media) {
 
-  media.forEach(m => {
-    totalLikes += m.likes;
-    if (m.isLiked) {
-      totalLikes += 1;
-    }
-  });
-  return totalLikes;
-}
 
-const totalLikesEl = document.querySelector("#total-likes");
 //Récupère les données de médias pour le photographe actuel et les affiche
+let media = [];
+
+function renderMedia() {
+  const mediaList = document.querySelector(".media-photographer");
+  mediaList.innerHTML = "";
+  media.forEach((m) => {
+    mediaList.appendChild(m.render());
+  });
+}
+
+function sortMedia() {
+  const sortBy = sortBySelect.value;
+
+  if (sortBy === "popularity") {
+    media.sort((a, b) => b.likes - a.likes);
+  } else if (sortBy === "date") {
+    media.sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
+  } else if (sortBy === "title") {
+    media.sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  renderMedia();
+}
+
+const sortBySelect = document.getElementById("sort-by");
+sortBySelect.addEventListener("change", sortMedia);
+
 function fetchMedia() {
   const url = new URL(window.location.href);
   const photographerId = url.searchParams.get("id");
-
   fetch("https://5sensprod.github.io/Projet6-Fisheye/data/photographers.json")
     .then((response) => response.json())
     .then((data) => {
-      const photographerData = data.photographers.find((p) => p.id == photographerId);
-      const media = data.media
-        .filter((m) => m.photographerId == photographerId)
-        .map((m) => createMediaFromData(m, photographerId));
+      media = data.media.filter((m) => m.photographerId == photographerId).map(m => createMediaFromData(m, photographerId));
 
-      const mediaList = document.querySelector(".media-photographer");
-
-      // Tri des médias par popularité (nombre de likes décroissant)
-      media.sort((a, b) => b.likes - a.likes);
-
-      media.forEach((m) => {
-        mediaList.appendChild(m.render());
-      });
+      media.sort((a, b) => b.likes - a.likes); // Tri par popularité décroissante par défaut
+      renderMedia(); // Affiche les médias triés par popularité
 
       const totalLikes = getTotalLikes(media);
-
       totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
     });
 }
-
 fetchMedia();
