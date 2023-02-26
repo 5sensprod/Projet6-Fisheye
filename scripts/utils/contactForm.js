@@ -1,18 +1,16 @@
 import { getPhotographerById } from '../data/photographersFetcher.js';
-
-let isModalOpen = false;
+import { disableTabNavigation, navElements, closeModal } from './navigation-utils.js';
 
 // Elements du DOM
 const modal = document.getElementById("contact_modal");
-const pageContent = document.querySelector('.page-content');
 const closeButton = document.getElementById('close_modal_button');
 const contactButton = document.querySelector('.contact_button');
 const submitButton = document.querySelector('.submit_button');
-const mediaItems = document.querySelectorAll('.media-item');
-const videoElements = document.querySelectorAll('video');
+
 
 // Afficher la modale
 function displayModal() {
+  disableTabNavigation(navElements);
   const url = new URL(window.location.href);
   const id = url.searchParams.get("id");
 
@@ -28,71 +26,33 @@ function displayModal() {
       modalContainer.setAttribute('aria-hidden', 'false');
       modalContainer.removeAttribute('aria-modal');
       modalContainer.removeAttribute('tabindex');
-      isModalOpen = true;
+
     });
-
-  mediaItems.forEach(mediaItem => {
-    const mediaLink = mediaItem.querySelector('.media-link');
-    mediaLink.setAttribute('tabindex', '-1');
-  });
-
-  contactButton.setAttribute('tabindex', '-1');
-
-  videoElements.forEach(video => {
-    video.setAttribute('tabindex', '-1');
-    video.setAttribute('aria-hidden', 'true');
-  });
-
-  pageContent.setAttribute('tabindex', '-1');
-  pageContent.setAttribute('aria-hidden', 'true');
-  pageContent.classList.add('modal-open');
+  
+  // Afficher la modale
   modal.style.display = "block";
   document.body.style.overflow = 'hidden';
 }
 contactButton.addEventListener('click', displayModal);
 
-// Fermer la modale
-function closeModal() {
-  modal.style.display = "none";
-  modal.setAttribute('aria-hidden', 'true');
-  isModalOpen = false;
-
-  mediaItems.forEach(mediaItem => {
-    const mediaLink = mediaItem.querySelector('.media-link');
-    mediaLink.removeAttribute('tabindex');
-  });
-
-  videoElements.forEach(video => {
-    video.removeAttribute('tabindex');
-    video.removeAttribute('aria-hidden');
-  });
-
-  contactButton.removeAttribute('tabindex');
-
-  pageContent.removeAttribute('aria-hidden');
-  pageContent.classList.remove('modal-open');
-  pageContent.removeAttribute('tabindex');
-  document.body.style.overflow = '';
-}
-
 // Fermer la modale en cliquant sur Escape
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    closeModal();
+    closeModal(modal, navElements)
   }
 });
 
 // Fermer la modale en cliquant sur enter sur le bouton de fermeture
 function handleCloseModalKeydown(event) {
   if (event.key === 'Enter') {
-    closeModal();
+    closeModal(modal, navElements)
   }
 }
 
 // Fermer la modale en cliquant sur le bouton de fermeture
 
 closeButton.addEventListener('keydown', handleCloseModalKeydown);
-closeButton.addEventListener('click', closeModal);
+closeButton.addEventListener('click', () => closeModal(modal, navElements));
 submitButton.addEventListener("click", submitForm);
 
 // Gestion de la soumission du formulaire
@@ -173,7 +133,7 @@ function submitForm(event) {
     console.log("Email :", email);
     console.log("Message :", message);
     form.reset();
-    closeModal();
+    closeModal(modal, navElements)
   }
 }
 

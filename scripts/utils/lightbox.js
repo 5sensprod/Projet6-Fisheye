@@ -1,3 +1,5 @@
+import { disableTabNavigation, closeLightbox, navElements } from './navigation-utils.js';
+
 // Déclare la variable lightbox en tant que variable globale
 const mediaUrl = 'assets/medias';
 const imageType = 'image';
@@ -7,6 +9,8 @@ const lightboxContent = document.querySelector(".lightbox-media");
 const lightboxTitle = document.querySelector(".lightbox-title");
 const lightboxPrev = document.querySelector(".lightbox-prev");
 const lightboxNext = document.querySelector(".lightbox-next");
+
+
 
 
 // La lightbox
@@ -21,6 +25,9 @@ export function showLightbox(media) {
     }
   }
   const mediaList = allMedia;
+
+  // Appelle la fonction pour désactiver la navigation par tabulation       
+  disableTabNavigation(navElements);
 
   // Affiche le média actuel
 
@@ -57,14 +64,14 @@ export function showLightbox(media) {
   const closeButton = document.querySelector(".modal-close");
   closeButton.addEventListener("click", (e) => {
     if (e.target === closeButton) {
-      lightbox.style.display = "none";
+      closeLightbox(lightbox, navElements);
     }
   });
 
   // Ferme la lightbox quand l'utilisateur clique en dehors de la lightbox
   lightbox.addEventListener("click", (e) => {
     if (e.target === lightbox) {
-      lightbox.style.display = "none";
+      closeLightbox(lightbox, navElements);
     }
   });
 
@@ -133,7 +140,7 @@ export function showLightbox(media) {
 
       case 'Escape':
         // ferme la lightbox
-        lightbox.style.display = "none";
+        closeLightbox(lightbox, navElements);
         break;
     }
   }
