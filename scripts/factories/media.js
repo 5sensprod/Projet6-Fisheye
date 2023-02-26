@@ -158,6 +158,7 @@ function renderMedia() {
 }
 
 
+
 //Fonction de tri des médias
 function sortMedia() {
   const sortFunctions = {
@@ -174,7 +175,22 @@ function sortMedia() {
 }
 
 const sortBySelect = document.getElementById("sort-by");
-sortBySelect.addEventListener("change", sortMedia);
+const arrowIcon = document.querySelector('.select-style i');
+
+// Ajouter un gestionnaire d'événements pour l'ouverture de la liste déroulante
+sortBySelect.addEventListener('click', function() {
+  arrowIcon.classList.toggle('rotate');
+});
+
+// Ajouter un gestionnaire d'événements pour la fermeture de la liste déroulante
+sortBySelect.addEventListener('blur', function() {
+  arrowIcon.classList.remove('rotate');
+});
+
+// Ajouter un gestionnaire d'événements 'change' pour le tri des éléments
+sortBySelect.addEventListener('change', function() {
+  sortMedia();
+});
 
 function fetchMedia() {
   const url = new URL(window.location.href);

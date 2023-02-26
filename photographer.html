@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/993684100f.js" crossorigin="anonymous"></script>
   <title>Fisheye - photographe </title>
+  
 </head>
 
 <body>
@@ -23,14 +24,19 @@
         <div class="photographer-portrait">
         </div>
       </div>
-      <div class="dropdown">
-        <label for="sort-by">Trier par :</label>
+      
+      <label for="sort-by">Trier par :</label>
+      <div class="select-style">
         <select id="sort-by">
-          <option value="popularity" selected>Popularité &#x25BE;</option>
-          <option value="date">Date &#x25BE;</option>
-          <option value="title">Titre &#x25BE;</option>
+          <option value="popularity" selected>Popularité</option>
+          <option value="date">Date</option>
+          <option value="title">Titre</option>
         </select>
+        <i class="fas fa-chevron-down"></i>
       </div>
+      
+      
+
       <section class="media-photographer"></section>
       <div class="modal-lb">
         <div class="modal-content">
@@ -88,7 +94,7 @@
   <script src="scripts/data/photographersFetcher.js" type="module"></script>
   <script src="scripts/factories/media.js" type="module"></script>
   <script src="scripts/utils/contactForm.js" type="module"></script>
-  <script src="scripts/utils/lightbox.js" type="module"></script>
+  <!-- <script src="scripts/utils/lightbox.js" type="module"></script> -->
   <!-- <script src="scripts/utils/mediaSorter.js" type="module"></script> -->
 
 </body>
