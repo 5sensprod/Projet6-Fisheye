@@ -349,7 +349,16 @@ textarea:focus {
     color: #fff;
     cursor: pointer;
     line-height: 45px;
+}
 
+button.sort_option  {
+
+        background-color: transparent;
+        border: none;
+        outline: none;
+        box-shadow: none;
+        cursor: pointer;
+     
 }
 
 .sort_option {
