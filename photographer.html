@@ -29,10 +29,23 @@
         <div id="sort-dropdown" class="sort_dropdown collapsed" tabindex="0">
           <span class="sort_used">popularité</span>
           <ul id="sort-by" class="sort_options">
-            <li class="sort_option sort_option-active" data-sort="popularity" role="button">Popularité</li>
-            <li class="sort_option" data-sort="date" role="button">Date</li>
-            <li class="sort_option" data-sort="title" role="button">Titre</li>
+            <li>
+              <button class="sort_option sort_option-active" data-sort="popularity" aria-pressed="true">
+                Popularité
+              </button>
+            </li>
+            <li>
+              <button class="sort_option" data-sort="date" aria-pressed="false">
+                Date
+              </button>
+            </li>
+            <li>
+              <button class="sort_option" data-sort="title" aria-pressed="false">
+                Titre
+              </button>
+            </li>
           </ul>
+          
           <span class="sort_icon fas fa-chevron-down" aria-hidden="true"></span>
         </div>
       </div>
