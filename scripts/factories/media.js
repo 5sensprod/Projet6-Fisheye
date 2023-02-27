@@ -211,6 +211,11 @@ sortOptions.forEach(option => {
       activateOption(option);
     }
   });
+
+  // Ajoute l'attribut aria-pressed sur chaque option de tri
+  option.setAttribute('role', 'button');
+  option.setAttribute('aria-pressed', option.classList.contains('sort_option-active'));
+
 });
 
 // Fonction pour activer une option
@@ -218,8 +223,10 @@ function activateOption(option) {
   // Met à jour la classe active
   sortOptions.forEach(option => {
     option.classList.remove('sort_option-active');
+    option.setAttribute('aria-pressed', false);
   });
   option.classList.add('sort_option-active');
+  option.setAttribute('aria-pressed', true);
 
   // Met à jour le texte de tri
   sortText.textContent = option.textContent;
@@ -237,6 +244,8 @@ function activateOption(option) {
       break;
   }
 }
+
+
 
 // Initialise l'attribut tabindex des options en fonction de l'état initial de la liste déroulante
 if (sortDropdown.classList.contains('collapsed')) {
