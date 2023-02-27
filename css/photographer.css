@@ -174,7 +174,7 @@ textarea:focus {
 .page-content.modal-open {
     filter: blur(5px);
     pointer-events: none;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .error-message {

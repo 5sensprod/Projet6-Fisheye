@@ -1,6 +1,7 @@
 import { getPhotographerById } from '../data/photographersFetcher.js';
 import { disableTabNavigation, navElements, closeModal } from './navigation-utils.js';
 
+
 // Elements du DOM
 const modal = document.getElementById("contact_modal");
 const closeButton = document.getElementById('close_modal_button');
@@ -8,12 +9,11 @@ const contactButton = document.querySelector('.contact_button');
 const submitButton = document.querySelector('.submit_button');
 
 
-// Afficher la modale
+// Fonction d'affichage de la modale
 function displayModal() {
   disableTabNavigation(navElements);
   const url = new URL(window.location.href);
   const id = url.searchParams.get("id");
-
   getPhotographerById(id)
     .then(photographer => {
       const photographerName = photographer.name;
@@ -28,12 +28,23 @@ function displayModal() {
       modalContainer.removeAttribute('tabindex');
 
     });
-  
+
   // Afficher la modale
   modal.style.display = "block";
   document.body.style.overflow = 'hidden';
+
+  // Ajouter la classe "modal-open" à la "page-content"
+  const pageContent = document.querySelector(".page-content");
+  pageContent.classList.add("modal-open");
+
 }
 contactButton.addEventListener('click', displayModal);
+
+document.addEventListener('click', (event) => {
+  if (modal.style.display === "block" && !event.target.closest(".modal-content") && !event.target.matches(".contact_button")) {
+    closeModal(modal, navElements);
+  }
+});
 
 // Fermer la modale en cliquant sur Escape
 document.addEventListener('keydown', (event) => {
@@ -49,9 +60,7 @@ function handleCloseModalKeydown(event) {
   }
 }
 
-
 // Fermer la modale en cliquant sur le bouton de fermeture
-
 closeButton.addEventListener('keydown', handleCloseModalKeydown);
 closeButton.addEventListener('click', () => closeModal(modal, navElements));
 submitButton.addEventListener("click", submitForm);
@@ -171,3 +180,4 @@ messageInput.addEventListener("input", function () {
     error.textContent = "";
   }
 });
+

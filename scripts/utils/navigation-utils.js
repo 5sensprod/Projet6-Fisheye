@@ -13,9 +13,8 @@ function hideModal(modal) {
 const TAB_SELECTORS = [
     '.sort_dropdown collapsed',
     '.media-link',
-    '.page-content',
     '.dropdown',
-    '#sort-dropdown', 
+    '#sort-dropdown',
     '.contact_button'
 ];
 
@@ -62,4 +61,5 @@ export function closeModal(modal, navElements) {
     hideModal(modal);
     enableTabNavigation(navElements);
     enableBodyScroll();
+    document.querySelector('.page-content').classList.remove('modal-open');
 }

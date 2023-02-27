@@ -20,12 +20,11 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
     type,
   };
 
-  media.render = function (isInLightbox) {
+  media.render = function () {
     const mediaItem = document.createElement("article");
     mediaItem.classList.add("media-item");
 
     const mediaLink = createMediaLink(this);
-    
 
     let mediaContent = this.type === imageType
       ? document.createElement("img")
@@ -54,12 +53,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
       mediaContent.addEventListener('click', function (e) {
         e.preventDefault();
         showLightbox(media);
-        isInLightbox = true;
       });
-    }
-
-    if (isInLightbox) {
-      mediaContent.classList.add("lightbox-media");
     }
 
     const mediaInfo = document.createElement("div");
