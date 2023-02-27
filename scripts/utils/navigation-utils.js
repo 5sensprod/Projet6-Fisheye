@@ -1,11 +1,21 @@
+// Fonction pour rétablir le défilement du corps du document
+function enableBodyScroll() {
+    document.body.style.overflow = 'auto';
+}
+
+// Fonction pour faire disparaitre les modales
+function hideModal(modal) {
+    modal.style.display = "none";
+}
+
+
 // Définition des sélecteurs
 const TAB_SELECTORS = [
-    // '#sort-dropdown',
+    '.sort_dropdown collapsed',
     '.media-link',
-    // '.media-video',
     '.page-content',
     '.dropdown',
-    // '#sort-by', 
+    '#sort-dropdown', 
     '.contact_button'
 ];
 
@@ -42,14 +52,14 @@ export function enableTabNavigation(elements) {
 
 // Fonction pour fermer la lightbox et réactiver la navigation par tabulation
 export function closeLightbox(lightbox, navElements) {
-    lightbox.style.display = "none";
+    hideModal(lightbox);
     enableTabNavigation(navElements);
+    enableBodyScroll();
 }
 
 // Fonction pour fermer la modale et réactiver la navigation par tabulation
 export function closeModal(modal, navElements) {
-    modal.style.display = "none";
+    hideModal(modal);
     enableTabNavigation(navElements);
-    document.body.style.overflow = 'auto';
+    enableBodyScroll();
 }
-

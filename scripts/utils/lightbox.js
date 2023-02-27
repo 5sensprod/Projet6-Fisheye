@@ -76,6 +76,7 @@ export function showLightbox(media) {
 
   // Affiche la lightbox
   lightbox.style.display = "block";
+  document.body.style.overflow = 'hidden';
 
   // Ferme la lightbox quand l'utilisateur clique sur le bouton de fermeture
   const closeButton = document.querySelector(".modal-close");
