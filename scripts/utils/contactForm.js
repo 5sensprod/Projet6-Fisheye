@@ -49,6 +49,7 @@ function handleCloseModalKeydown(event) {
   }
 }
 
+
 // Fermer la modale en cliquant sur le bouton de fermeture
 
 closeButton.addEventListener('keydown', handleCloseModalKeydown);
@@ -58,7 +59,7 @@ submitButton.addEventListener("click", submitForm);
 // Gestion de la soumission du formulaire
 
 // Sélection des éléments du formulaire
-const form = document.querySelector('form');
+// const form = document.querySelector('form');
 const lastnameInput = document.querySelector('#lastname');
 const firstnameInput = document.querySelector('#firstname');
 const emailInput = document.querySelector('#email');

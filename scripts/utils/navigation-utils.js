@@ -1,10 +1,11 @@
 // Définition des sélecteurs
 const TAB_SELECTORS = [
+    // '#sort-dropdown',
     '.media-link',
-    '.media-video',
+    // '.media-video',
     '.page-content',
     '.dropdown',
-    '#sort-by',
+    // '#sort-by', 
     '.contact_button'
 ];
 
@@ -30,12 +31,12 @@ export function enableTabNavigation(elements) {
     TAB_SELECTORS.forEach(selector => {
         const elementsToEnable = document.querySelectorAll(selector);
         elementsToEnable.forEach(element => {
-            element.removeAttribute('tabindex');
+            element.setAttribute('tabindex', '0');
         });
     });
 
     elements.forEach(element => {
-        element.removeAttribute('tabindex');
+        element.setAttribute('tabindex', '0');
     });
 }
 

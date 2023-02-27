@@ -234,6 +234,7 @@ textarea:focus {
     margin-bottom: 10px;
 }
 
+
 .lightbox-media {
     max-width: 800px;
     max-height: 90%;
@@ -258,6 +259,11 @@ textarea:focus {
 .lightbox-next {
     right: 10px;
 }
+
+.lightbox-media.media-video {
+    width: 800px;
+}
+
 
 .sort_icon {
     color: #fff;
@@ -357,7 +363,6 @@ textarea:focus {
     color: #911C1C; */
     display: none
 }
-
 
 
 .sort_used {

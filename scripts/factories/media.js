@@ -20,11 +20,12 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
     type,
   };
 
-  media.render = function () {
+  media.render = function (isInLightbox) {
     const mediaItem = document.createElement("article");
     mediaItem.classList.add("media-item");
 
     const mediaLink = createMediaLink(this);
+    
 
     let mediaContent = this.type === imageType
       ? document.createElement("img")
@@ -38,6 +39,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
       mediaContent.classList.add("media-video");
       mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
       mediaContent.setAttribute("alt", this.title);
+      mediaContent.setAttribute("tabindex", "-1");
 
       const description = document.createElement("source");
       description.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.description}`);
@@ -52,7 +54,12 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
       mediaContent.addEventListener('click', function (e) {
         e.preventDefault();
         showLightbox(media);
+        isInLightbox = true;
       });
+    }
+
+    if (isInLightbox) {
+      mediaContent.classList.add("lightbox-media");
     }
 
     const mediaInfo = document.createElement("div");
