@@ -1,5 +1,6 @@
 import { showLightbox } from '../utils/lightbox.js';
 
+
 const mediaUrl = 'assets/medias';
 const imageType = 'image';
 const videoType = 'video';
@@ -22,13 +23,13 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
   media.render = function () {
     const mediaItem = document.createElement("article");
     mediaItem.classList.add("media-item");
-  
+
     const mediaLink = createMediaLink(this);
-  
+
     let mediaContent = this.type === imageType
       ? document.createElement("img")
       : document.createElement("video");
-  
+
     if (this.type === imageType) {
       mediaContent.classList.add("media-img");
       mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
@@ -37,47 +38,47 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
       mediaContent.classList.add("media-video");
       mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
       mediaContent.setAttribute("alt", this.title);
-  
+
       const description = document.createElement("source");
       description.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.description}`);
       description.setAttribute("type", "audio/mpeg");
       mediaContent.appendChild(description);
     }
-  
+
     mediaLink.appendChild(mediaContent);
     mediaItem.appendChild(mediaLink);
-  
+
     if (this.type === videoType) {
       mediaContent.addEventListener('click', function (e) {
         e.preventDefault();
         showLightbox(media);
       });
     }
-  
+
     const mediaInfo = document.createElement("div");
     mediaInfo.classList.add("media-info");
-  
+
     const mediaTitle = document.createElement("h2");
     mediaTitle.classList.add("media-title");
     mediaTitle.textContent = this.title;
-  
+
     const mediaLikes = document.createElement("div");
     mediaLikes.classList.add("media-likes");
-  
+
     const likesIcon = document.createElement("i");
     likesIcon.classList.add("fas", "fa-heart");
     let isLiked = false;
-  
+
     const likesCount = document.createElement("span");
     likesCount.classList.add("likes-count");
     likesCount.textContent = this.likes;
-  
+
     mediaLikes.appendChild(likesIcon);
     mediaLikes.appendChild(likesCount);
-  
+
     mediaInfo.appendChild(mediaTitle);
     mediaInfo.appendChild(mediaLikes);
-  
+
     likesIcon.addEventListener("click", function () {
       isLiked ? (
         likesCount.textContent = parseInt(likesCount.textContent) - 1,
@@ -93,13 +94,22 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
         totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`
       );
     });
-  
+
     mediaItem.appendChild(mediaInfo);
-  
+
     return mediaItem;
   };
   return media;
 }
+
+// function toggleLike(media, likesCountEl, likesIconEl, totalLikesEl) {
+//   media.isLiked = !media.isLiked;
+//   media.likes += media.isLiked ? 1 : -1;
+//   likesCountEl.textContent = media.likes;
+//   likesIconEl.classList.toggle("liked");
+//   const totalLikes = parseInt(totalLikesEl.innerHTML) + (media.isLiked ? 1 : -1);
+//   totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
+// }
 
 function createMediaLink(media) {
   const mediaLink = document.createElement("a");
@@ -157,40 +167,134 @@ function renderMedia() {
   });
 }
 
-
-
-//Fonction de tri des médias
-function sortMedia() {
-  const sortFunctions = {
-    popularity: (a, b) => b.likes - a.likes,
-    date: (a, b) => Date.parse(a.date) - Date.parse(b.date),
-    title: (a, b) => a.title.localeCompare(b.title)
-  };
-
-  const sortBy = sortBySelect.value;
-  const sortFunction = sortFunctions[sortBy];
-
-  media.sort(sortFunction);
-  renderMedia();
+// Tri des médias par popularité décroissante
+function sortMediaByPopularity(media) {
+  media.sort((a, b) => b.likes - a.likes);
+  renderMedia(media);
 }
 
-const sortBySelect = document.getElementById("sort-by");
-const arrowIcon = document.querySelector('.select-style i');
+// Tri des médias par date de publication décroissante
+function sortMediaByDate(media) {
+  media.sort((a, b) => new Date(b.date) - new Date(a.date));
+  renderMedia(media);
+}
 
-// Ajouter un gestionnaire d'événements pour l'ouverture de la liste déroulante
-sortBySelect.addEventListener('click', function() {
-  arrowIcon.classList.toggle('rotate');
+// Tri des médias par titre (ordre alphabétique)
+function sortMediaByTitle(media) {
+  media.sort((a, b) => a.title.localeCompare(b.title));
+  renderMedia(media);
+}
+
+const sortOptions = document.querySelectorAll('.sort_option');
+const sortDropdown = document.querySelector('.sort_dropdown');
+const sortIcon = document.querySelector('.sort_icon');
+const defaultSortOption = document.querySelector('.sort_option-active');
+const sortText = document.querySelector('.sort_dropdown span');
+
+// Initialise le texte de tri par défaut
+sortText.textContent = defaultSortOption.textContent;
+
+// Ajoute l'événement "click" pour la div qui englobe la liste de tri
+sortDropdown.addEventListener('click', () => {
+  sortDropdown.classList.toggle('collapsed');
+  sortIcon.classList.toggle('rotate');
 });
 
-// Ajouter un gestionnaire d'événements pour la fermeture de la liste déroulante
-sortBySelect.addEventListener('blur', function() {
-  arrowIcon.classList.remove('rotate');
+// Ajoute l'événement "click" et "keydown" pour chaque option de tri
+sortOptions.forEach(option => {
+  option.addEventListener('click', () => {
+    activateOption(option);
+  });
+  option.addEventListener('keydown', (event) => {
+    if (event.key === 'Enter') {
+      activateOption(option);
+    }
+  });
 });
 
-// Ajouter un gestionnaire d'événements 'change' pour le tri des éléments
-sortBySelect.addEventListener('change', function() {
-  sortMedia();
+// Fonction pour activer une option
+function activateOption(option) {
+  // Met à jour la classe active
+  sortOptions.forEach(option => {
+    option.classList.remove('sort_option-active');
+  });
+  option.classList.add('sort_option-active');
+
+  // Met à jour le texte de tri
+  sortText.textContent = option.textContent;
+
+  // Trie les médias en fonction de l'option sélectionnée
+  switch (option.dataset.sort) {
+    case 'popularity':
+      sortMediaByPopularity(media);
+      break;
+    case 'date':
+      sortMediaByDate(media);
+      break;
+    case 'title':
+      sortMediaByTitle(media);
+      break;
+  }
+}
+
+// Initialise l'attribut tabindex des options en fonction de l'état initial de la liste déroulante
+if (sortDropdown.classList.contains('collapsed')) {
+  sortOptions.forEach(option => {
+    option.setAttribute('tabindex', '-1');
+  });
+} else {
+  sortOptions.forEach(option => {
+    option.setAttribute('tabindex', '0');
+  });
+}
+
+sortIcon.addEventListener('click', () => {
+  sortDropdown.classList.toggle('selected');
 });
+
+const sortDropTab = document.querySelector('.sort_dropdown');
+
+sortDropTab.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    event.preventDefault();
+    sortDropdown.classList.toggle('collapsed');
+    sortIcon.classList.toggle('rotate');
+
+    if (sortDropdown.classList.contains('collapsed')) {
+      sortOptions.forEach(option => {
+        option.setAttribute('tabindex', '-1');
+      });
+    } else {
+      sortOptions.forEach(option => {
+        option.setAttribute('tabindex', '0');
+      });
+    }
+  }
+});
+
+// Ajoute l'événement "keydown" pour fermer la liste avec la touche "Escape"
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && !sortDropdown.classList.contains('collapsed')) {
+    sortDropdown.classList.add('collapsed');
+    sortIcon.classList.remove('rotate');
+  }
+});
+
+// Ajoute l'événement "click" pour fermer la liste en cliquant en dehors de celle-ci
+window.addEventListener('click', (event) => {
+  if (!sortDropdown.contains(event.target)) {
+    sortDropdown.classList.add('collapsed');
+    sortIcon.classList.remove('rotate');
+  }
+});
+// Fermer la liste quand on sort de la liste avec la touche "Tab"
+sortOptions[sortOptions.length - 1].addEventListener('keydown', (event) => {
+  if (event.key === 'Tab' && !event.shiftKey) {
+    sortDropdown.classList.add('collapsed');
+    sortIcon.classList.remove('rotate');
+  }
+});
+
 
 function fetchMedia() {
   const url = new URL(window.location.href);

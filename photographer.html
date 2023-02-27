@@ -9,7 +9,6 @@
   <link href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/993684100f.js" crossorigin="anonymous"></script>
   <title>Fisheye - photographe </title>
-  
 </head>
 
 <body>
@@ -24,20 +23,21 @@
         <div class="photographer-portrait">
         </div>
       </div>
-      <section class="section-sort">
-        <label for="sort-by">Trier par</label>
-      <div class="select-style">
-        <select id="sort-by">
-          <option value="popularity" selected>Popularité</option>
-          <option value="date">Date</option>
-          <option value="title">Titre</option>
-        </select>
-        <i class="fas fa-chevron-down"></i>
-      </div>
+
+      <section class="sort">
+        <label class="sort_label" for="sort-by">Trier par</label>
+        <div id="sort-dropdown" class="sort_dropdown collapsed" tabindex="0">
+          <span class="sort_used">popularité</span>
+          <ul id="sort-by" class="sort_options">
+            <li class="sort_option sort_option-active" data-sort="popularity" role="button">Popularité</li>
+            <li class="sort_option" data-sort="date" role="button">Date</li>
+            <li class="sort_option" data-sort="title" role="button">Titre</li>
+          </ul>
+          <i class="sort_icon fas fa-chevron-down"></i>
+        </div>
+
+
       </section>
-      
-      
-      
 
       <section class="media-photographer"></section>
       <div class="modal-lb">
@@ -49,7 +49,6 @@
         <div class="lightbox">
           <h2 class="lightbox-title"></h2>
           <div class="lightbox-media">
-
           </div>
         </div>
       </div>
@@ -96,8 +95,7 @@
   <script src="scripts/data/photographersFetcher.js" type="module"></script>
   <script src="scripts/factories/media.js" type="module"></script>
   <script src="scripts/utils/contactForm.js" type="module"></script>
-  <!-- <script src="scripts/utils/lightbox.js" type="module"></script> -->
-  <!-- <script src="scripts/utils/mediaSorter.js" type="module"></script> -->
+  <script src="scripts/utils/lightbox.js" type="module"></script>
 
 </body>
 
