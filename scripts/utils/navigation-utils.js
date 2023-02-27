@@ -49,5 +49,6 @@ export function closeLightbox(lightbox, navElements) {
 export function closeModal(modal, navElements) {
     modal.style.display = "none";
     enableTabNavigation(navElements);
+    document.body.style.overflow = 'auto';
 }
 
