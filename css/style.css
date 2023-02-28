@@ -51,6 +51,12 @@ a {
     outline: none;
 } */
 
+.back-home {
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: 100px;
+}
+
 header {
     display: flex;
     flex-direction: row;
@@ -67,9 +73,13 @@ h1 {
 .title-home {
     padding-left: 20px;
 }
-
-.logo {
+.logo,
+.logo-page {
     height: 50px;
+    /* margin-left: 100px; */
+}
+
+.logo  {
     margin-left: 100px;
 }
 

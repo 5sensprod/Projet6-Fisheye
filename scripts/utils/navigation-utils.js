@@ -11,6 +11,7 @@ function hideModal(modal) {
 
 // Définition des sélecteurs
 const TAB_SELECTORS = [
+    '.back-home',
     '.sort_dropdown collapsed',
     '.media-link',
     '.dropdown',
