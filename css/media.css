@@ -21,8 +21,6 @@
   overflow: hidden;
 }
 
-
-
 .media-video,
 .media-img {
   width: 350px;
@@ -71,25 +69,18 @@
   font-size: 18px;
   color: red;
   margin-right: 5px;
-
 }
-
 
 /* Animation */
 .media-video,
 .media-img {
   transition: all 0.3s ease-in-out;
-  /* Ajoute une transition fluide */
 }
 
 .media-link:hover .media-video,
 .media-link:hover .media-img {
   transform: scale(1.1);
-  /* Agrandit l'image de 10% */
-
 }
-
-/* Style pour la lightbox */
 
 /* Style pour la modale */
 
@@ -106,14 +97,6 @@
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.973);
 }
-
-/* .modal-content {
-  position: relative;
-  margin: auto;
-  padding: 20px;
-  max-width: 800px;
-  max-height: 90%;
-} */
 
 /* Boutons lightbox  */
 .modal-close {
@@ -140,7 +123,6 @@ button.modal-close {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* margin-top: 20px; */
 }
 
 .lightbox-title {
@@ -175,10 +157,6 @@ button.modal-close {
   border-radius: 5px;
 }
 
-/* .lightbox video {
-  background-color: #000;
-} */
-
 .lightbox-prev {
   left: 10px;
 }
@@ -186,7 +164,3 @@ button.modal-close {
 .lightbox-next {
   right: 10px;
 }
-
-/* .lightbox-media.media-video {
-  width: 800px;
-} */

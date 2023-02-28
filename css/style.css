@@ -50,11 +50,6 @@ a {
     color: black
 }
 
-/* FORMULAIRE */
-/* input[type=search]:focus {
-    outline: none;
-} */
-
 .back-home {
     display: inline-block;
     box-sizing: border-box;
@@ -81,7 +76,6 @@ h1 {
 .logo,
 .logo-page {
     height: 50px;
-    /* margin-left: 100px; */
 }
 
 .logo {
@@ -96,7 +90,6 @@ h1 {
 .page-content.modal-open {
     filter: blur(5px);
     pointer-events: none;
-    /* overflow: hidden; */
 }
 
 #main-page,
@@ -218,5 +211,4 @@ figure {
         font-weight: 400;
         font-size: 24px;
     }
-
 }
