@@ -5,9 +5,10 @@
 .photograph-header {
     display: flex;
     background-color: #FAFAFA;
-    height: 300px;
+    min-height: 300px;
     justify-content: space-around;
     align-items: center;
+    padding: 0 20px;
 }
 
 
@@ -34,6 +35,7 @@
     font-weight: 400;
     font-size: 18px;
     line-height: 23px;
+    margin-bottom: 20px;
 }
 
 .submit_button,
@@ -48,6 +50,10 @@
     background-color: #901C1C;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.contact_button {
+    margin: 0 40px 0 32px;
 }
 
 .photographer-portrait img {
@@ -169,12 +175,6 @@ input[type="text"]:focus,
 textarea:focus {
     outline: none;
     border-color: #0077ff;
-}
-
-.page-content.modal-open {
-    filter: blur(5px);
-    pointer-events: none;
-    /* overflow: hidden; */
 }
 
 .error-message {
