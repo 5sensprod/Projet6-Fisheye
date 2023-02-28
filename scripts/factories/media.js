@@ -7,6 +7,7 @@ const videoType = 'video';
 let totalLikes = 0;
 const totalLikesEl = document.querySelector("#total-likes");
 
+
 //Crée un objet media à partir des paramètres fournis
 function createMedia(id, title, image, likes, date, price, photographerId, type) {
   const media = {
@@ -238,6 +239,8 @@ function activateOption(option) {
       break;
   }
 }
+
+
 
 // Initialise l'attribut tabindex des options en fonction de l'état initial de la liste déroulante
 if (sortDropdown.classList.contains('collapsed')) {

@@ -56,7 +56,7 @@
     transition: all 0.3s ease-in-out;
 }
 
-
+.contact_button:focus,
 .contact_button:hover {
     background-color: #DB8876;
     color: black;
@@ -357,13 +357,11 @@ textarea:focus {
     font-style: normal;
     font-weight: 700;
     font-size: 18px;
-    color: #fff;
     cursor: pointer;
     line-height: 45px;
 }
 
 button.sort_option  {
-
         background-color: transparent;
         border: none;
         outline: none;
@@ -373,11 +371,20 @@ button.sort_option  {
 }
 
 .sort_option {
+    color: #fff;
+    background-color: #911C1C;
     border-top: 1.5px solid #fff;
     width: 90%;
     margin: 0 auto;
+    transition: all 0.3s ease-in-out; 
+    
 }
 
+.sort_option:focus,
+.sort_option:hover {
+    background-color: #DB8876;
+    color: black;
+  }
 .sort_option-active {
     /* background-color: #4e0e0e;
     color: #911C1C; */
@@ -418,3 +425,5 @@ button.sort_option  {
         font-size: 36px;
       }
 }
+
+/*  Animation */
