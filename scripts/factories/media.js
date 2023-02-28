@@ -68,7 +68,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
     mediaLikes.classList.add("media-likes");
 
     const likesIcon = document.createElement("i");
-    likesIcon.classList.add("fas", "fa-heart");
+    likesIcon.classList.add("fas", "fa-heart", "media-likes-icon");
     let isLiked = false;
 
     const likesCount = document.createElement("span");

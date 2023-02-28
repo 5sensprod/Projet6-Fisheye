@@ -90,7 +90,7 @@ h1 {
 
 .page-content {
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0 auto 65px auto;
 }
 
 .page-content.modal-open {
