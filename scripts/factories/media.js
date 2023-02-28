@@ -216,7 +216,7 @@ sortOptions.forEach(option => {
 
 // Fonction pour activer une option
 function activateOption(option) {
-  
+
   // Met à jour la classe active
   sortOptions.forEach(option => {
     option.classList.remove('sort_option-active');

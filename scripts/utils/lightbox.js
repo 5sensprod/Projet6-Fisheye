@@ -18,10 +18,10 @@ const lightboxNext = document.querySelector(".lightbox-next");
 export function showLightbox(media) {
   // Créer l'élément img ou video selon le type de media
   const lightboxMedia = media.type === imageType ? document.createElement('img') : document.createElement('video');
-  
+
   // Ajouter la classe lightbox-media à l'élément media de la lightbox
   lightboxMedia.classList.add('lightbox-media');
-  
+
   let currentIndex = null;
   const allMedia = Array.from(document.querySelectorAll(".media-item")).filter((item) => item.querySelector("img, video"));
   for (let i = 0; i < allMedia.length; i++) {
@@ -46,17 +46,17 @@ export function showLightbox(media) {
     lightboxContent.innerHTML = "";
     lightboxContent.appendChild(lightboxVideo);
 
-      // Ajoute la classe media-video une fois que la vidéo a fini de charger
-  lightboxVideo.addEventListener("loadedmetadata", function() {
-    lightboxVideo.classList.add("media-video");
-  });
+    // Ajoute la classe media-video une fois que la vidéo a fini de charger
+    lightboxVideo.addEventListener("loadedmetadata", function () {
+      lightboxVideo.classList.add("media-video");
+    });
 
     // ajout description video pour l'accessibilité
     const description = document.createElement("source");
     description.setAttribute("src", `${mediaUrl}/${media.photographerId}/${media.description}`);
     description.setAttribute("type", "audio/mpeg");
     lightboxVideo.appendChild(description);
-    
+
 
   } else if (media.type === imageType) {
     const lightboxImg = document.createElement("img");
@@ -65,23 +65,23 @@ export function showLightbox(media) {
     lightboxContent.innerHTML = "";
     lightboxContent.appendChild(lightboxImg);
 
-    lightboxImg.addEventListener('load', function() {
+    lightboxImg.addEventListener('load', function () {
       lightboxImg.classList.add('media-img');
     });
-  
+
   }
 
   // Affiche le titre du média actuel
   lightboxTitle.textContent = media.title;
 
   // Affiche la lightbox
-  lightbox.style.display = "block";
+  lightbox.style.display = "flex";
   document.body.style.overflow = 'hidden';
 
   // Ferme la lightbox quand l'utilisateur clique sur le bouton de fermeture
   const closeButton = document.querySelector(".modal-close");
   closeButton.addEventListener("click", (e) => {
-    if (e.target === closeButton) {
+    if (e.target === closeButton || e.target.classList.contains('fa-xmark')) {
       closeLightbox(lightbox, navElements);
     }
   });

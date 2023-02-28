@@ -80,3 +80,104 @@
   /* Agrandit l'image de 10% */
 
 }
+
+/* Style pour la lightbox */
+
+/* Style pour la modale */
+
+.modal-lb {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: white;
+}
+
+/* .modal-content {
+  position: relative;
+  margin: auto;
+  padding: 20px;
+  max-width: 800px;
+  max-height: 90%;
+} */
+
+/* Boutons lightbox  */
+.modal-close {
+  align-self: flex-start;
+}
+
+button.lightbox-prev,
+button.lightbox-next,
+button.modal-close {
+  background-color: transparent;
+  border: none;
+}
+
+.lightbox-prev,
+.lightbox-next,
+.modal-close i {
+  font-size: 44px;
+  font-weight: bold;
+  color: #911C1C;
+}
+
+
+.lightbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* margin-top: 20px; */
+}
+
+.lightbox-title {
+  color: #911C1C;
+  font-weight: 400;
+  font-size: 24px;
+  margin: 12px 0 10px 20px;
+}
+
+
+.lightbox-media {
+  width: 1050px;
+  height: 90vh;
+  border-radius: 5px;
+}
+
+.lightbox img,
+.lightbox video {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+
+.lightbox-media video,
+.lightbox-media img {
+  width: inherit;
+  height: inherit;
+  max-width: inherit;
+  max-height: inherit;
+  border-radius: inherit;
+}
+
+/* .lightbox video {
+  background-color: #000;
+} */
+
+.lightbox-prev {
+  left: 10px;
+}
+
+.lightbox-next {
+  right: 10px;
+}
+
+/* .lightbox-media.media-video {
+  width: 800px;
+} */

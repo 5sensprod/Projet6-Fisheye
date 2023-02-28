@@ -22,7 +22,7 @@
     <main id="main-page">
       <div class="photograph-header">
         <div id="photographer-info"></div>
-        <button class="contact_button">Contactez-moi</button>
+        <button class="contact_button" aria-label="Contactez-moi">Contactez-moi</button>
         <div class="photographer-portrait">
         </div>
       </div>
@@ -43,15 +43,21 @@
       <div class="media-photographer"></div>
       <div class="modal-lb">
         <div class="modal-content">
-          <button class="modal-close">&times;</button>
-          <button class="lightbox-prev">&lt;</button>
-          <button class="lightbox-next">&gt;</button>
-        </div>
-        <div class="lightbox">
-          <h2 class="lightbox-title"></h2>
-          <div class="lightbox-media">
+          <div class="lightbox">
+            <button class="lightbox-prev" aria-label="Média précédent">
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+            <div class="lightbox-media"></div>
+            <button class="lightbox-next" aria-label="Média suivant">
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+            <button class="modal-close" aria-label="Fermer le diaporama">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
           </div>
+          <h2 class="lightbox-title"></h2>
         </div>
+
       </div>
     </main>
     <div class="photographer-footer">
