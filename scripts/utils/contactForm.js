@@ -40,8 +40,9 @@ function displayModal() {
 }
 contactButton.addEventListener('click', displayModal);
 
+// Fermer la modale en cliquant en dehors de la modale
 document.addEventListener('click', (event) => {
-  if (modal.style.display === "block" && !event.target.closest(".modal-content") && !event.target.matches(".contact_button")) {
+  if (modal.style.display === "block" && !modal.contains(event.target) && !event.target.matches(".contact_button")) {
     closeModal(modal, navElements);
   }
 });
