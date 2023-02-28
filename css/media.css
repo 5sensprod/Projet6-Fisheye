@@ -33,7 +33,7 @@
 .media-info {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   height: 50px;
 }
 
@@ -41,7 +41,6 @@
 .media-info .likes-count,
 .media-info .media-likes-icon {
   color: #901C1C;
-  line-height: 24px;
 }
 
 .likes-count {
@@ -53,12 +52,17 @@
   font-size: 20px;
 }
 
+.media-likes-icon.liked {
+  color: #DB8876;
+}
+
+
 .media-title {
   font-size: 24px;
   text-align: left;
 }
 
-.media-likes {
+.likes-button-container {
   display: flex;
   flex-direction: row-reverse;
   align-items: center;
@@ -103,6 +107,7 @@
   align-self: flex-start;
 }
 
+button.likes-button,
 button.lightbox-prev,
 button.lightbox-next,
 button.modal-close {
