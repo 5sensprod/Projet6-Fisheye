@@ -97,31 +97,33 @@
     translate: -50% -50%;
     border-radius: 5px;
     background-color: #DB8876;
-    width: 50%;
+    width: 669px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     padding: 35px;
     margin: auto;
+    max-height: 100vh;
+    overflow-y: auto;
 }
 
 .header-modal {
-    position: relative;
+    display: flex;
     width: 100%;
+    justify-content: space-between;
+    align-items: baseline;
 }
 
-.header-modal img {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 30px;
+#close_modal_button {
+    width: 42px;
+    margin-left: 10px;
 }
 
-.header-modal h2,
+.header-modal_title,
 #photographer-name {
     font-weight: 400;
-    font-size: 38px;
+    font-size: 64px;
 }
 
 
@@ -149,7 +151,7 @@ form {
 
 form label {
     color: #312E2E;
-    font-size: 28px;
+    font-size: 36px;
 }
 
 form div {
@@ -361,13 +363,13 @@ textarea:focus {
     line-height: 45px;
 }
 
-button.sort_option  {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        box-shadow: none;
-        cursor: pointer;
-     
+button.sort_option {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+
 }
 
 .sort_option {
@@ -376,15 +378,16 @@ button.sort_option  {
     border-top: 1.5px solid #fff;
     width: 90%;
     margin: 0 auto;
-    transition: all 0.3s ease-in-out; 
-    
+    transition: all 0.3s ease-in-out;
+
 }
 
 .sort_option:focus,
 .sort_option:hover {
     background-color: #DB8876;
     color: black;
-  }
+}
+
 .sort_option-active {
     /* background-color: #4e0e0e;
     color: #911C1C; */
@@ -407,23 +410,53 @@ button.sort_option  {
         flex-direction: column;
         align-items: center;
         border-radius: 8px;
-      }
+    }
 
-        .photograph-header > *:nth-child(1) {
-            order: 2;
-            text-align: center;
-        }
-      .photograph-header > *:nth-child(2) {
+    .photograph-header>*:nth-child(1) {
+        order: 2;
+        text-align: center;
+    }
+
+    .photograph-header>*:nth-child(2) {
         order: 3;
-      }
-      
-      .photograph-header > *:nth-child(3) {
-        order: 1;
-      }
+    }
 
-      .photographer-name {
+    .photograph-header>*:nth-child(3) {
+        order: 1;
+    }
+
+    .photographer-name {
         font-size: 36px;
-      }
+    }
+
+    .modal {
+        width: 100%;
+    }
 }
 
-/*  Animation */
+@media screen and (max-width: 445px) {
+    #close_modal_button {
+        width: 25px;
+        margin-left: 5px;
+    }
+
+    .header-modal_title,
+    #photographer-name {
+        font-weight: 400;
+        font-size: 45px;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="email"] {
+        font-weight: 400;
+        font-size: 28px;
+        padding-left: 5px;
+    }
+
+    .error-message {
+        font-size: 18px;
+
+    }
+
+}

@@ -41,6 +41,10 @@ html {
     padding: 0
 }
 
+input::placeholder {
+    font-size: 36px;
+}
+
 a {
     text-decoration: none;
     color: black
@@ -73,13 +77,14 @@ h1 {
 .title-home {
     padding-left: 20px;
 }
+
 .logo,
 .logo-page {
     height: 50px;
     /* margin-left: 100px; */
 }
 
-.logo  {
+.logo {
     margin-left: 100px;
 }
 
@@ -144,7 +149,7 @@ figure {
     cursor: pointer;
 }
 
-.card_portrait *{
+.card_portrait * {
     white-space: nowrap;
 }
 
@@ -173,31 +178,45 @@ figure {
 @media screen and (max-width: 930px) {
     .photographer_section {
         grid-template-columns: 1fr 1fr;
-      }
+    }
 }
 
 /* Breakpoint à 716px  */
 @media screen and (max-width: 716px) {
     .photographer_section {
         grid-template-columns: 1fr;
-      }
+    }
 
-      header {
+    header {
         flex-direction: column;
         /* justify-items: center; */
         margin: 42px auto 0 auto;
         height: auto;
-      }
+    }
 
-      .logo {
+    .logo {
         margin-left: 0;
-      }
+    }
 
-      .title-home {
+    .title-home {
         margin: 0;
-      }
+    }
 
-      .back-home {
+    .back-home {
         margin-left: 0;
-      }
+    }
+}
+
+@media screen and (max-width: 445px) {
+    input::placeholder {
+        font-size: 24px;
+    }
+
+    input[type="text"],
+    textarea,
+    input[type="email"] {
+        font-weight: 400;
+        font-size: 24px;
+    }
+
 }

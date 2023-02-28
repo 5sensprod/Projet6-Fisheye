@@ -88,9 +88,11 @@ function validateForm() {
   // Validation du champ nom
   if (lastnameInput.value === '') {
     lastnameError.textContent = 'Le nom est requis';
+    lastnameError.setAttribute('aria-live', 'assertive'); // Ajout de l'attribut aria-live
     errors = true;
   } else if (!nameRegex.test(lastnameInput.value)) {
     lastnameError.textContent = 'Le nom doit contenir des lettres uniquement';
+    lastnameError.setAttribute('aria-live', 'assertive'); // Ajout de l'attribut aria-live
     errors = true;
   } else {
     lastnameError.textContent = '';
@@ -99,9 +101,11 @@ function validateForm() {
   // Validation du champ prénom
   if (firstnameInput.value === '') {
     firstnameError.textContent = 'Le prénom est requis';
+    firstnameError.setAttribute('aria-live', 'assertive'); // Ajout de l'attribut aria-live
     errors = true;
   } else if (!nameRegex.test(firstnameInput.value)) {
     firstnameError.textContent = 'Le prénom doit contenir des lettres uniquement';
+    firstnameError.setAttribute('aria-live', 'assertive'); // Ajout de l'attribut aria-live
     errors = true;
   } else {
     firstnameError.textContent = '';
@@ -110,9 +114,11 @@ function validateForm() {
   // Validation du champ email
   if (emailInput.value === '') {
     emailError.textContent = 'L\'adresse e-mail est requise';
+    emailError.setAttribute('aria-live', 'assertive'); // Ajout de l'attribut aria-live
     errors = true;
   } else if (!emailRegex.test(emailInput.value)) {
     emailError.textContent = 'L\'adresse e-mail est invalide';
+    emailError.setAttribute('aria-live', 'assertive'); // Ajout de l'attribut aria-live
     errors = true;
   } else {
     emailError.textContent = '';
@@ -121,6 +127,7 @@ function validateForm() {
   // Validation du champ message
   if (messageInput.value === '') {
     messageError.textContent = 'Le message est requis';
+    messageError.setAttribute('aria-live', 'assertive'); // Ajout de l'attribut aria-live
     errors = true;
   } else {
     messageError.textContent = '';

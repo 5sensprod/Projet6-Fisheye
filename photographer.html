@@ -16,7 +16,7 @@
     <header>
       <!-- Retour home -->
       <a href="index.html" class="back-home" aria-label="Retour à la page d'accueil">
-      <img src="assets/images/logo.png" class="logo-page" alt="Logo de notre entreprise de photographie">
+        <img src="assets/images/logo.png" class="logo-page" alt="Logo de notre entreprise de photographie">
       </a>
     </header>
     <main id="main-page">
@@ -62,29 +62,31 @@
   <div id="contact_modal">
     <div class="modal">
       <div class="header-modal">
-        <h2>Contactez-moi</h2>
-        <div id="photographer-name"></div>
+        <div class="header-modal_text">
+          <h2 class="header-modal_title">Contactez-moi</h2>
+          <div id="photographer-name"></div>
+        </div>
         <img src="assets/icons/close.svg" id="close_modal_button" tabindex="6" alt="Bouton de fermeture de la modale">
       </div>
       <form>
         <div>
           <label for="lastname">Nom</label>
-          <input type="text" id="lastname" name="lastname" required tabindex="1">
+          <input type="text" id="lastname" name="lastname" required placeholder="Votre nom" tabindex="1">
           <div class="error-message" id="lastname-error"></div>
         </div>
         <div>
           <label for="firstname">Prénom</label>
-          <input type="text" id="firstname" name="firstname" required tabindex="2">
+          <input type="text" id="firstname" name="firstname" required placeholder="Votre prénom" tabindex="2">
           <div class="error-message" id="firstname-error"></div>
         </div>
         <div>
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" required tabindex="3">
+          <input type="email" id="email" name="email" required placeholder="ex: adresse@mail.com" tabindex="3">
           <div class="error-message" id="email-error"></div>
         </div>
         <div>
           <label for="message">Message</label>
-          <textarea id="message" name="message" required tabindex="4"></textarea>
+          <textarea id="message" name="message" required placeholder="Saisissez votre message" tabindex="4"></textarea>
           <div class="error-message" id="message-error"></div>
         </div>
         <button class="submit_button" type="submit" tabindex="5">Envoyer</button>
