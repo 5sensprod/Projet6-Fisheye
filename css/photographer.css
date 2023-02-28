@@ -378,3 +378,22 @@ button.sort_option  {
     color: #fff;
     margin-left: 8px;
 }
+
+@media screen and (max-width: 716px) {
+    .photograph-header {
+        margin-top: 40px;
+        gap: 35px;
+        padding-top: 35px;
+        padding-bottom: 35px;
+        flex-direction: column;
+        align-items: center;
+        border-radius: 8px;
+      }
+      .photograph-header > *:nth-child(2) {
+        order: 2;
+      }
+      
+      .photograph-header > *:nth-child(3) {
+        order: 1;
+      }
+}
