@@ -104,15 +104,6 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
   return media;
 }
 
-// function toggleLike(media, likesCountEl, likesIconEl, totalLikesEl) {
-//   media.isLiked = !media.isLiked;
-//   media.likes += media.isLiked ? 1 : -1;
-//   likesCountEl.textContent = media.likes;
-//   likesIconEl.classList.toggle("liked");
-//   const totalLikes = parseInt(totalLikesEl.innerHTML) + (media.isLiked ? 1 : -1);
-//   totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
-// }
-
 function createMediaLink(media) {
   const mediaLink = document.createElement("a");
   mediaLink.classList.add("media-link");

@@ -87,11 +87,11 @@ export function showLightbox(media) {
   });
 
   // Ferme la lightbox quand l'utilisateur clique en dehors de la lightbox
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) {
-      closeLightbox(lightbox, navElements);
-    }
-  });
+  // lightbox.addEventListener("click", (e) => {
+  //   if (e.target === lightbox) {
+  //     closeLightbox(lightbox, navElements);
+  //   }
+  // });
 
   // Affiche le média suivant quand l'utilisateur clique sur le bouton suivant
   lightboxNext.addEventListener("click", (e) => {
