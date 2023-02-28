@@ -53,6 +53,16 @@
 }
 
 .contact_button {
+    transition: all 0.3s ease-in-out;
+}
+
+
+.contact_button:hover {
+    background-color: #DB8876;
+    color: black;
+}
+
+.contact_button {
     margin: 0 40px 0 32px;
 }
 
@@ -390,11 +400,20 @@ button.sort_option  {
         align-items: center;
         border-radius: 8px;
       }
+
+        .photograph-header > *:nth-child(1) {
+            order: 2;
+            text-align: center;
+        }
       .photograph-header > *:nth-child(2) {
-        order: 2;
+        order: 3;
       }
       
       .photograph-header > *:nth-child(3) {
         order: 1;
+      }
+
+      .photographer-name {
+        font-size: 36px;
       }
 }

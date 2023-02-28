@@ -66,3 +66,17 @@
   font-size: 16px;
   color: #333;
 }
+
+/* Animation */
+.media-video,
+.media-img {
+  transition: all 0.3s ease-in-out; /* Ajoute une transition fluide */
+}
+
+
+
+.media-item:hover .media-video,
+.media-item:hover .media-img {
+  transform: scale(1.1); /* Agrandit l'image de 10% */
+
+}
