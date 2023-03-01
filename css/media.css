@@ -102,6 +102,10 @@
   background-color: rgba(0, 0, 0, 0.973);
 }
 
+.modal-content {
+  padding: 0 20px;
+}
+
 /* Boutons lightbox  */
 .modal-close {
   align-self: flex-start;
@@ -123,6 +127,15 @@ button.modal-close {
   color: #911C1C;
 }
 
+button.modal-close {
+  position: absolute;
+  top: 20px;
+}
+
+.lightbox-control_right {
+  display: flex;
+  flex-direction: column;
+}
 
 .lightbox {
   display: flex;
@@ -134,14 +147,15 @@ button.modal-close {
   color: #911C1C;
   font-weight: 400;
   font-size: 24px;
-  margin: 12px 0 10px 25px;
+ margin-left: 47px;
 }
 
 
 .lightbox-media {
-  max-width: 970px;
+  max-width: 90%;
   max-height: 90vh;
   border-radius: 5px;
+  margin: 0 20px;
 }
 
 .lightbox img,
@@ -156,7 +170,7 @@ button.modal-close {
 .lightbox-media img {
   width: inherit;
   height: inherit;
-  max-width: inherit;
+  /* max-width: inherit; */
   max-height: inherit;
   border-radius: inherit;
   border-radius: 5px;
