@@ -45,8 +45,12 @@ function photographerFactory(data) {
     descContainer.appendChild(taglineElement);
     descContainer.appendChild(priceElement);
 
+    const figcaption = document.createElement('figcaption');
+    figcaption.textContent = `Photographe ${name}`;
+
     figure.appendChild(img);
     figure.appendChild(h2);
+    figure.appendChild(figcaption);
     article.appendChild(figure);
     article.appendChild(descContainer);
     return article;
