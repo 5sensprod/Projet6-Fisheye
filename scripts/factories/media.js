@@ -96,6 +96,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
         likesCount.textContent = parseInt(likesCount.textContent) - 1;
         likesIcon.classList.remove("liked");
         likesCount.classList.remove("liked");
+        
         isLiked = false;
         totalLikes--;
         totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
@@ -112,6 +113,7 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
         totalLikesEl.setAttribute("aria-label", `Total des j'aimes à ${totalLikes}`);
         likesButton.setAttribute("aria-label", `Vous avez aimé ${media.title}`);
       }
+      likesButton.classList.toggle('liked');
     });
 
     mediaItem.appendChild(mediaInfo);

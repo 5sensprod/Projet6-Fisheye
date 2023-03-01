@@ -121,6 +121,10 @@ button.modal-close {
   border: none;
 }
 
+button.likes-button {
+  position: relative;
+}
+
 .lightbox-prev,
 .lightbox-next,
 .modal-close span {
