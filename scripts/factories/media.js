@@ -78,6 +78,8 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
     const likesCount = document.createElement("span");
     likesCount.classList.add("likes-count");
     likesCount.textContent = this.likes;
+    // Ajout aria-label à la like media
+    likesCount.setAttribute("aria-label", `${media.title} à ${this.likes} j'aime`);
 
     likesButton.appendChild(likesIcon);
     likesButtonContainer.appendChild(likesButton);
@@ -89,16 +91,21 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
       if (isLiked) {
         likesCount.textContent = parseInt(likesCount.textContent) - 1;
         likesIcon.classList.remove("liked");
+        likesCount.classList.remove("liked");
         isLiked = false;
         totalLikes--;
         totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
+        // Ajout aria-label à la span totalLikesEl
+        totalLikesEl.setAttribute("aria-label", `Total des j'aimes à ${totalLikes}`);
         likesButton.setAttribute("aria-label", `Ajouter un j'aime à ${media.title}`);
       } else {
         likesCount.textContent = parseInt(likesCount.textContent) + 1;
         likesIcon.classList.add("liked");
+        likesCount.classList.add("liked");
         isLiked = true;
         totalLikes++;
         totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
+        totalLikesEl.setAttribute("aria-label", `Total des j'aimes à ${totalLikes}`);
         likesButton.setAttribute("aria-label", `Vous avez aimé ${media.title}`);
       }
     });

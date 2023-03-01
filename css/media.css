@@ -13,7 +13,7 @@
   justify-content: center;
   align-content: center;
   width: 350px;
-  margin: 20px 0;
+  margin: 20px 5px;
 }
 
 .media-link {
@@ -53,6 +53,7 @@
   font-size: 20px;
 }
 
+.likes-count.liked,
 .media-likes-icon.liked {
   color: #DB8876;
 }
