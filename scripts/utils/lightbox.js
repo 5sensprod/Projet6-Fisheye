@@ -86,73 +86,78 @@ export function showLightbox(media) {
     }
   });
 
-  // Affiche le média suivant quand l'utilisateur clique sur le bouton suivant
-  lightboxNext.addEventListener("click", (e) => {
-    currentIndex = currentIndex < mediaList.length - 1 ? currentIndex + 1 : 0;
-    const nextMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
-    if (nextMedia.tagName.toLowerCase() === "video") {
-      nextMedia.controls = true;
-    }
-    lightboxContent.innerHTML = "";
-    lightboxContent.appendChild(nextMedia);
-    const nextMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
-    lightboxTitle.textContent = nextMediaTitle;
-  });
+// Affiche le média suivant quand l'utilisateur clique sur le bouton suivant
+lightboxNext.addEventListener("click", (e) => {
+  currentIndex = currentIndex < mediaList.length - 1 ? currentIndex + 1 : 0;
+  const nextMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
+  if (nextMedia.tagName.toLowerCase() === "video") {
+    nextMedia.controls = true;
+    nextMedia.tabIndex = 0; // ajout de tabindex sur la balise video
+  }
+  lightboxContent.innerHTML = "";
+  lightboxContent.appendChild(nextMedia);
+  const nextMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
+  lightboxTitle.textContent = nextMediaTitle;
+});
 
-  // Affiche le média précédent quand l'utilisateur clique sur le bouton précédent
-  lightboxPrev.addEventListener("click", (e) => {
-    currentIndex = (currentIndex > 0) ? (currentIndex - 1) : (mediaList.length - 1);
-    const prevMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
+// Affiche le média précédent quand l'utilisateur clique sur le bouton précédent
+lightboxPrev.addEventListener("click", (e) => {
+  currentIndex = (currentIndex > 0) ? (currentIndex - 1) : (mediaList.length - 1);
+  const prevMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
 
-    if (prevMedia.tagName.toLowerCase() === "video") {
-      prevMedia.controls = true;
-    }
+  if (prevMedia.tagName.toLowerCase() === "video") {
+    prevMedia.controls = true;
+    prevMedia.tabIndex = 0; // ajout de tabindex sur la balise video
+  }
 
-    lightboxContent.innerHTML = "";
-    lightboxContent.appendChild(prevMedia);
-    const prevMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
-    lightboxTitle.textContent = prevMediaTitle;
-  });
+  lightboxContent.innerHTML = "";
+  lightboxContent.appendChild(prevMedia);
+  const prevMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
+  lightboxTitle.textContent = prevMediaTitle;
+});
 
-  // Gère les événements du clavier pour passer au média suivant ou précédent
-  function handleKeyboardEvent(e) {
-    switch (e.key) {
-      case 'ArrowLeft':
-        if (currentIndex > 0) {
-          currentIndex--;
-        } else {
-          currentIndex = mediaList.length - 1;
-        }
-        const prevMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
-        if (prevMedia.tagName.toLowerCase() === "video") {
-          prevMedia.controls = true;
-        }
-        lightboxContent.innerHTML = "";
-        lightboxContent.appendChild(prevMedia);
-        const prevMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
-        lightboxTitle.textContent = prevMediaTitle;
-        break;
+// Gère les événements du clavier pour passer au média suivant ou précédent
+function handleKeyboardEvent(e) {
+  switch (e.key) {
+    case 'ArrowLeft':
+      if (currentIndex > 0) {
+        currentIndex--;
+      } else {
+        currentIndex = mediaList.length - 1;
+      }
+      const prevMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
+      if (prevMedia.tagName.toLowerCase() === "video") {
+        prevMedia.controls = true;
+        prevMedia.tabIndex = 0; // ajout de tabindex sur la balise video
+      }
+      lightboxContent.innerHTML = "";
+      lightboxContent.appendChild(prevMedia);
+      const prevMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
+      lightboxTitle.textContent = prevMediaTitle;
+      break;
 
-      case 'ArrowRight':
-        if (currentIndex < mediaList.length - 1) {
-          currentIndex++;
-        } else {
-          currentIndex = 0;
-        }
-        const nextMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
-        if (nextMedia.tagName.toLowerCase() === "video") {
-          nextMedia.controls = true;
-        }
-        lightboxContent.innerHTML = "";
-        lightboxContent.appendChild(nextMedia);
-        const nextMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
-        lightboxTitle.textContent = nextMediaTitle;
-        break;
+    case 'ArrowRight':
+      if (currentIndex < mediaList.length - 1) {
+        currentIndex++;
+      } else {
+        currentIndex = 0;
+      }
+      const nextMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
+      if (nextMedia.tagName.toLowerCase() === "video") {
+        nextMedia.controls = true;
+        nextMedia.tabIndex = 0; // ajout de tabindex sur la balise video
+      }
+      lightboxContent.innerHTML = "";
+      lightboxContent.appendChild(nextMedia);
+      const nextMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
+      lightboxTitle.textContent = nextMediaTitle;
+      break;
 
-      case 'Escape':
-        // ferme la lightbox
-        closeLightbox(lightbox, navElements);
-        break;
+    case 'Escape':
+      // ferme la lightbox
+      closeLightbox(lightbox, navElements);
+      break
+;
     }
   }
 
