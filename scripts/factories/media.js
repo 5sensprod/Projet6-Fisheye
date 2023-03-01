@@ -7,6 +7,10 @@ const videoType = 'video';
 let totalLikes = 0;
 const totalLikesEl = document.querySelector("#total-likes");
 
+const params = new URLSearchParams(window.location.search);
+const photographerName = params.get('name');
+
+document.title = `${photographerName} - Fisheye`;
 
 //Crée un objet media à partir des paramètres fournis
 function createMedia(id, title, image, likes, date, price, photographerId, type) {
@@ -284,6 +288,8 @@ sortDropTab.addEventListener('keydown', (event) => {
     }
   }
 });
+
+
 
 // Ajoute l'événement "keydown" pour fermer la liste avec la touche "Escape"
 window.addEventListener('keydown', (event) => {

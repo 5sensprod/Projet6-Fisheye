@@ -19,8 +19,10 @@ function photographerFactory(data) {
     });
 
     figure.addEventListener('click', function () {
-      window.location.href = `photographer.html?id=${data.id}`;
+      window.location.href = `photographer.html?id=${data.id}&name=${encodeURIComponent(data.name)}`;
     });
+
+
 
     const img = document.createElement('img');
     img.setAttribute('src', picture);
@@ -71,3 +73,4 @@ async function displayData() {
 }
 
 displayData();
+
