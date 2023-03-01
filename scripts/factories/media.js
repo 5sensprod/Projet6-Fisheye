@@ -24,13 +24,13 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
   media.render = function () {
     const mediaItem = document.createElement("article");
     mediaItem.classList.add("media-item");
-  
+
     const mediaLink = createMediaLink(this);
-  
+
     let mediaContent = this.type === imageType
       ? document.createElement("img")
       : document.createElement("video");
-  
+
     if (this.type === imageType) {
       mediaContent.classList.add("media-img");
       mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
@@ -40,51 +40,51 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
       mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
       mediaContent.setAttribute("alt", this.title);
       mediaContent.setAttribute("tabindex", "-1");
-  
+
       const description = document.createElement("source");
       description.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.description}`);
       description.setAttribute("type", "audio/mpeg");
       mediaContent.appendChild(description);
     }
-  
+
     mediaLink.appendChild(mediaContent);
     mediaItem.appendChild(mediaLink);
-  
+
     if (this.type === videoType) {
       mediaContent.addEventListener('click', function (e) {
         e.preventDefault();
         showLightbox(media);
       });
     }
-  
+
     const mediaInfo = document.createElement("div");
     mediaInfo.classList.add("media-info");
-  
+
     const mediaTitle = document.createElement("h2");
     mediaTitle.classList.add("media-title");
     mediaTitle.textContent = this.title;
-  
+
     const likesButtonContainer = document.createElement("div");
     likesButtonContainer.classList.add("likes-button-container");
-  
+
     const likesButton = document.createElement("button");
     likesButton.classList.add("likes-button");
     likesButton.setAttribute("aria-label", `Ajouter un j'aime à "${this.title}"`);
     let isLiked = false;
-  
+
     const likesIcon = document.createElement("i");
     likesIcon.classList.add("fas", "fa-heart", "media-likes-icon");
-  
+
     const likesCount = document.createElement("span");
     likesCount.classList.add("likes-count");
     likesCount.textContent = this.likes;
-  
+
     likesButton.appendChild(likesIcon);
     likesButtonContainer.appendChild(likesButton);
     likesButtonContainer.appendChild(likesCount);
     mediaInfo.appendChild(mediaTitle);
     mediaInfo.appendChild(likesButtonContainer);
-  
+
     likesButton.addEventListener("click", function () {
       if (isLiked) {
         likesCount.textContent = parseInt(likesCount.textContent) - 1;
@@ -102,9 +102,9 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
         likesButton.setAttribute("aria-label", `Vous avez aimé ${media.title}`);
       }
     });
-  
+
     mediaItem.appendChild(mediaInfo);
-  
+
     return mediaItem;
   };
   return media;
@@ -213,7 +213,6 @@ sortOptions.forEach(option => {
 
 // Fonction pour activer une option
 function activateOption(option) {
-
   // Met à jour la classe active
   sortOptions.forEach(option => {
     option.classList.remove('sort_option-active');
@@ -222,6 +221,10 @@ function activateOption(option) {
 
   // Met à jour le texte de tri
   sortText.textContent = option.textContent;
+
+  // Met à jour l'attribut aria-label de la span
+  const sortUsed = document.querySelector('.sort_used');
+  sortUsed.setAttribute('aria-label', option.getAttribute('aria-label'));
 
   // Trie les médias en fonction de l'option sélectionnée
   switch (option.dataset.sort) {
@@ -236,6 +239,7 @@ function activateOption(option) {
       break;
   }
 }
+
 
 
 
@@ -296,7 +300,6 @@ sortOptions[sortOptions.length - 1].addEventListener('keydown', (event) => {
     sortIcon.classList.remove('rotate');
   }
 });
-
 
 function fetchMedia() {
   const url = new URL(window.location.href);
