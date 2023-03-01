@@ -2,7 +2,6 @@ import { getPhotographers } from '../data/photographersFetcher.js';
 
 function photographerFactory(data) {
   const { name, id, city, country, tagline, price, portrait } = data;
-
   const picture = `assets/photographers/${portrait}`;
 
   function getUserCardDOM() {
