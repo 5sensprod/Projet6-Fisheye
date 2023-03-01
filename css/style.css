@@ -215,4 +215,8 @@ figure {
     .card_portrait * {
         white-space:unset;
     }
+
+    .page-content {
+        margin-bottom: 80px;
+    }
 }

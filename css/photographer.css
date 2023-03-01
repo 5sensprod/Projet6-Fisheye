@@ -360,4 +360,10 @@ button.sort_option {
     .error-message {
         font-size: 18px;
     }
+
+    .photographer-footer {
+        max-width: 376px;
+        width: unset;
+        gap: 30px;
+    }
 }
