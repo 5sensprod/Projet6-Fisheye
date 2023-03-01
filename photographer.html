@@ -19,63 +19,59 @@
         <img src="assets/images/logo.png" class="logo-page" alt="Logo de notre entreprise de photographie">
       </a>
     </header>
+    <!-- Page photographe -->
     <main id="main-page">
       <div class="photograph-header">
         <div id="photographer-info"></div>
+        <!-- Contact -->
         <button class="contact_button" aria-label="Contactez-moi">Contactez-moi</button>
-        <div class="photographer-portrait">
-        </div>
+        <div class="photographer-portrait"></div>
       </div>
-
+      <!-- Tri -->
       <div class="sort">
         <p class="sort_label">Trier par</p>
         <div id="sort-dropdown" class="sort_dropdown collapsed" tabindex="0" aria-label="Trier les médias">
           <span class="sort_used" aria-label="Trier par popularité">popularité</span>
           <ul id="sort-by" class="sort_options">
-            <li class="sort_option sort_option-active" data-sort="popularity" aria-label="Trier par popularité">Popularité</li>
+            <li class="sort_option sort_option-active" data-sort="popularity" aria-label="Trier par popularité">
+              Popularité</li>
             <li class="sort_option" data-sort="date" aria-label="Trier par date">Date</li>
             <li class="sort_option" data-sort="title" aria-label="Trier par titre">Titre</li>
-          </ul>          
+          </ul>
           <span class="sort_icon fas fa-chevron-down" aria-hidden="true"></span>
         </div>
       </div>
-      
-
-      
-
+      <!-- Medias -->
       <div class="media-photographer"></div>
-
-
-      <div class="modal-lb">
-        <div class="modal-content">
-          <div class="lightbox">
-            <button class="lightbox-prev" aria-label="Média précédent">
-              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
-            </button>
-            <div class="lightbox-media">
-              
-            </div>
-            <div class="lightbox-control_right">
-              
-              <button class="modal-close" aria-label="Fermer le diaporama">
-                <i class="fa-solid fa-xmark" aria-hidden="true"></i>
-              </button> 
-             <button class="lightbox-next" aria-label="Média suivant">
-              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-            </button>
-            </div>
-            
-          </div>
-          <h2 class="lightbox-title"></h2>
-        </div>
-
+      <!-- encart -->
+      <div class="photographer-footer">
+        <div class="photographer-likes"><span id="total-likes"></span></div>
+        <div class="photographer-price"><span id="daily-price"></span></div>
       </div>
     </main>
-    <div class="photographer-footer">
-      <div class="photographer-likes"><span id="total-likes"></span></div>
-      <div class="photographer-price"><span id="daily-price"></span></div>
+  </div>
+  <!-- Lightbox -->
+  <div class="modal-lb">
+    <div class="modal-content">
+      <div class="lightbox">
+        <button class="lightbox-prev" aria-label="Média précédent">
+          <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+        </button>
+        <div class="lightbox-media">
+        </div>
+        <div class="lightbox-control_right">
+          <button class="modal-close" aria-label="Fermer le diaporama">
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+          <button class="lightbox-next" aria-label="Média suivant">
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <h2 class="lightbox-title"></h2>
     </div>
   </div>
+  <!-- Contact -->
   <div id="contact_modal">
     <div class="modal">
       <div class="header-modal">
