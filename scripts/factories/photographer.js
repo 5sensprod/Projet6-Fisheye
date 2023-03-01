@@ -12,6 +12,7 @@ function photographerFactory(data) {
     const figure = document.createElement('figure');
     figure.classList.add('card_portrait');
     figure.setAttribute('tabindex', '0');
+    figure.setAttribute('aria-label', `Afficher les médias de ${name}`);
     figure.addEventListener('keydown', function (event) {
       if (event.key === 'Enter' || event.key === ' ') {
         window.location.href = `photographer.html?id=${data.id}`;
