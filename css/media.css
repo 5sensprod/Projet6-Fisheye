@@ -121,7 +121,7 @@ button.modal-close {
 
 .lightbox-prev,
 .lightbox-next,
-.modal-close i {
+.modal-close span {
   font-size: 44px;
   font-weight: bold;
   color: #911C1C;
