@@ -254,8 +254,6 @@ function activateOption(option) {
 }
 
 
-
-
 // Initialise l'attribut tabindex des options en fonction de l'état initial de la liste déroulante
 if (sortDropdown.classList.contains('collapsed')) {
   sortOptions.forEach(option => {
@@ -323,9 +321,7 @@ function fetchMedia() {
     .then((response) => response.json())
     .then((data) => {
       media = data.media.filter((m) => m.photographerId == photographerId).map(m => createMediaFromData(m, photographerId));
-
-      media.sort((a, b) => b.likes - a.likes); // Tri par popularité décroissante par défaut
-      renderMedia(); // Affiche les médias triés par popularité
+      renderMedia(); 
 
       const totalLikes = getTotalLikes(media);
       totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
