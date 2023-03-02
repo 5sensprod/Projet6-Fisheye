@@ -1,5 +1,6 @@
 import { showLightbox } from '../utils/lightbox.js';
-
+import { createNode, setAttributes, addClass, removeClass, clearNode, appendNode, setInnerHTML, toggleClass } from '../utils/domUtils.js';
+// import { popularitySort, dateSort, titleSort } from '../modules/sort.js';
 
 const mediaUrl = 'assets/medias';
 const imageType = 'image';
@@ -26,110 +27,122 @@ function createMedia(id, title, image, likes, date, price, photographerId, type)
   };
 
   media.render = function () {
-    const mediaItem = document.createElement("article");
-    mediaItem.classList.add("media-item");
+    const mediaItem = createNode("article");
+addClass(mediaItem, "media-item");
 
-    const mediaLink = createMediaLink(this);
+const mediaLink = createMediaLink(this);
 
-    let mediaContent = this.type === imageType
-      ? document.createElement("img")
-      : document.createElement("video");
+let mediaContent = this.type === imageType
+  ? createNode("img")
+  : createNode("video");
 
-    if (this.type === imageType) {
-      mediaContent.classList.add("media-img");
-      mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
-      mediaContent.setAttribute("alt", this.title);
-    } else if (this.type === videoType) {
-      mediaContent.classList.add("media-video");
-      mediaContent.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.image}`);
-      mediaContent.setAttribute("alt", this.title);
-      mediaContent.setAttribute("tabindex", "-1");
+if (this.type === imageType) {
+  addClass(mediaContent, "media-img");
+  setAttributes(mediaContent, {
+    "src": `${mediaUrl}/${this.photographerId}/${this.image}`,
+    "alt": this.title,
+  });
+} else if (this.type === videoType) {
+  addClass(mediaContent, "media-video");
+  setAttributes(mediaContent, {
+    "src": `${mediaUrl}/${this.photographerId}/${this.image}`,
+    "alt": this.title,
+    "tabindex": "-1",
+  });
 
-      const description = document.createElement("source");
-      description.setAttribute("src", `${mediaUrl}/${this.photographerId}/${this.description}`);
-      description.setAttribute("type", "audio/mpeg");
-      mediaContent.appendChild(description);
-    }
+  const description = createNode("source");
+  setAttributes(description, {
+    "src": `${mediaUrl}/${this.photographerId}/${this.description}`,
+    "type": "audio/mpeg",
+  });
+  appendNode(mediaContent, description);
+}
 
-    mediaLink.appendChild(mediaContent);
-    mediaItem.appendChild(mediaLink);
+appendNode(mediaLink, mediaContent);
+appendNode(mediaItem, mediaLink);
 
-    if (this.type === videoType) {
-      mediaContent.addEventListener('click', function (e) {
-        e.preventDefault();
-        showLightbox(media);
-      });
-    }
+if (this.type === videoType) {
+  mediaContent.addEventListener('click', function (e) {
+    e.preventDefault();
+    showLightbox(media);
+  });
+}
 
-    const mediaInfo = document.createElement("div");
-    mediaInfo.classList.add("media-info");
+const mediaInfo = createNode("div");
+addClass(mediaInfo, "media-info");
 
-    const mediaTitle = document.createElement("h2");
-    mediaTitle.classList.add("media-title");
-    mediaTitle.textContent = this.title;
+const mediaTitle = createNode("h2");
+addClass(mediaTitle, "media-title");
+mediaTitle.textContent = this.title;
 
-    const likesButtonContainer = document.createElement("div");
-    likesButtonContainer.classList.add("likes-button-container");
+const likesButtonContainer = createNode("div");
+addClass(likesButtonContainer, "likes-button-container");
 
-    const likesButton = document.createElement("button");
-    likesButton.classList.add("likes-button");
-    likesButton.setAttribute("aria-label", `Ajouter un j'aime à "${this.title}"`);
-    let isLiked = false;
+const likesButton = createNode("button");
+addClass(likesButton, "likes-button");
+setAttributes(likesButton, {
+  "aria-label": `Ajouter un j'aime à "${this.title}"`,
+});
+let isLiked = false;
 
-    const likesIcon = document.createElement("i");
-    likesIcon.classList.add("fas", "fa-heart", "media-likes-icon");
+const likesIcon = createNode("i");
+addClass(likesIcon, "fas", "fa-heart", "media-likes-icon");
 
-    const likesCount = document.createElement("span");
-    likesCount.classList.add("likes-count");
-    likesCount.textContent = this.likes;
-    // Ajout aria-label à la like media
-    likesCount.setAttribute("aria-label", `${media.title} à ${this.likes} j'aime`);
+const likesCount = createNode("span");
+addClass(likesCount, "likes-count");
+likesCount.textContent = this.likes;
+// Ajout aria-label à la like media
+setAttributes(likesCount, {
+  "aria-label": `${this.title} à ${this.likes} j'aime`,
+});
 
-    likesButton.appendChild(likesIcon);
-    likesButtonContainer.appendChild(likesButton);
-    likesButtonContainer.appendChild(likesCount);
-    mediaInfo.appendChild(mediaTitle);
-    mediaInfo.appendChild(likesButtonContainer);
+appendNode(likesButton, likesIcon);
+appendNode(likesButtonContainer, likesButton);
+appendNode(likesButtonContainer, likesCount);
+appendNode(mediaInfo, mediaTitle);
+appendNode(mediaInfo, likesButtonContainer);
 
-    likesButton.addEventListener("click", function () {
-      if (isLiked) {
-        likesCount.textContent = parseInt(likesCount.textContent) - 1;
-        likesIcon.classList.remove("liked");
-        likesCount.classList.remove("liked");
-        
-        isLiked = false;
-        totalLikes--;
-        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
-        // Ajout aria-label à la span totalLikesEl
-        totalLikesEl.setAttribute("aria-label", `Total des j'aimes à ${totalLikes}`);
-        likesButton.setAttribute("aria-label", `Ajouter un j'aime à ${media.title}`);
-      } else {
-        likesCount.textContent = parseInt(likesCount.textContent) + 1;
-        likesIcon.classList.add("liked");
-        likesCount.classList.add("liked");
-        isLiked = true;
-        totalLikes++;
-        totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
-        totalLikesEl.setAttribute("aria-label", `Total des j'aimes à ${totalLikes}`);
-        likesButton.setAttribute("aria-label", `Vous avez aimé ${media.title}`);
-      }
-      likesButton.classList.toggle('liked');
-    });
+likesButton.addEventListener("click", function () {
+  if (isLiked) {
+    likesCount.textContent = parseInt(likesCount.textContent) - 1;
+    removeClass(likesIcon, "liked");
+    removeClass(likesCount, "liked");
+    
+    isLiked = false;
+    totalLikes--;
+    totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
+    // Ajout aria-label à la span totalLikesEl
+    totalLikesEl.setAttribute("aria-label", `Total des j'aimes à ${totalLikes}`);
+    likesButton.setAttribute("aria-label", `Ajouter un j'aime à ${this.title}`);
+  } else {
+    likesCount.textContent = parseInt(likesCount.textContent) + 1;
+    addClass(likesIcon, "liked");
+    addClass(likesCount, "liked");
+    isLiked = true;
+    totalLikes++;
+    totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
+    totalLikesEl.setAttribute("aria-label", `Total des j'aimes à ${totalLikes}`);
+    likesButton.setAttribute("aria-label", `Vous avez aimé ${this.title}`);
+  }
+  toggleClass(likesButton, 'liked');
+});
 
-    mediaItem.appendChild(mediaInfo);
+mediaItem.appendChild(mediaInfo);
 
-    return mediaItem;
-  };
+return mediaItem;
+};
   return media;
 }
 
 function createMediaLink(media) {
-  const mediaLink = document.createElement("a");
-  mediaLink.classList.add("media-link");
-  mediaLink.setAttribute("href", `${mediaUrl}/${media.photographerId}/${media.image}`);
-  mediaLink.setAttribute("data-lightbox", "gallery");
-  mediaLink.setAttribute("data-title", media.title);
-  mediaLink.setAttribute("aria-label", `Image nommée ${media.title}`);
+  const mediaLink = createNode("a");
+  addClass(mediaLink, "media-link");
+  setAttributes(mediaLink, {
+    "href": `${mediaUrl}/${media.photographerId}/${media.image}`,
+    "data-lightbox": "gallery",
+    "data-title": media.title,
+    "aria-label": `Image nommée ${media.title}`,
+  });
 
   // Ajout de l'écouteur d'événement de clic sur le lien
   mediaLink.addEventListener('click', function (e) {
@@ -173,146 +186,11 @@ let media = [];
 
 function renderMedia() {
   const mediaList = document.querySelector(".media-photographer");
-  mediaList.innerHTML = "";
+  clearNode(mediaList);
   media.forEach((m) => {
-    mediaList.appendChild(m.render());
+    appendNode(mediaList, m.render());
   });
 }
-
-// Tri des médias par popularité décroissante
-function sortMediaByPopularity(media) {
-  media.sort((a, b) => b.likes - a.likes);
-  renderMedia(media);
-}
-
-// Tri des médias par date de publication décroissante
-function sortMediaByDate(media) {
-  media.sort((a, b) => new Date(b.date) - new Date(a.date));
-  renderMedia(media);
-}
-
-// Tri des médias par titre (ordre alphabétique)
-function sortMediaByTitle(media) {
-  media.sort((a, b) => a.title.localeCompare(b.title));
-  renderMedia(media);
-}
-
-const sortOptions = document.querySelectorAll('.sort_option');
-const sortDropdown = document.querySelector('.sort_dropdown');
-const sortIcon = document.querySelector('.sort_icon');
-const defaultSortOption = document.querySelector('.sort_option-active');
-const sortText = document.querySelector('.sort_dropdown span');
-
-// Initialise le texte de tri par défaut
-sortText.textContent = defaultSortOption.textContent;
-
-// Ajoute l'événement "click" pour la div qui englobe la liste de tri
-sortDropdown.addEventListener('click', () => {
-  sortDropdown.classList.toggle('collapsed');
-  sortIcon.classList.toggle('rotate');
-});
-
-// Ajoute l'événement "click" et "keydown" pour chaque option de tri
-sortOptions.forEach(option => {
-  option.addEventListener('click', () => {
-    activateOption(option);
-  });
-  option.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      activateOption(option);
-    }
-  });
-});
-
-// Fonction pour activer une option
-function activateOption(option) {
-  // Met à jour la classe active
-  sortOptions.forEach(option => {
-    option.classList.remove('sort_option-active');
-  });
-  option.classList.add('sort_option-active');
-
-  // Met à jour le texte de tri
-  sortText.textContent = option.textContent;
-
-  // Met à jour l'attribut aria-label de la span
-  const sortUsed = document.querySelector('.sort_used');
-  sortUsed.setAttribute('aria-label', option.getAttribute('aria-label'));
-
-  // Trie les médias en fonction de l'option sélectionnée
-  switch (option.dataset.sort) {
-    case 'popularity':
-      sortMediaByPopularity(media);
-      break;
-    case 'date':
-      sortMediaByDate(media);
-      break;
-    case 'title':
-      sortMediaByTitle(media);
-      break;
-  }
-}
-
-
-// Initialise l'attribut tabindex des options en fonction de l'état initial de la liste déroulante
-if (sortDropdown.classList.contains('collapsed')) {
-  sortOptions.forEach(option => {
-    option.setAttribute('tabindex', '-1');
-  });
-} else {
-  sortOptions.forEach(option => {
-    option.setAttribute('tabindex', '0');
-  });
-}
-
-sortIcon.addEventListener('click', () => {
-  sortDropdown.classList.toggle('selected');
-});
-
-const sortDropTab = document.querySelector('.sort_dropdown');
-
-sortDropTab.addEventListener('keydown', (event) => {
-  if (event.key === 'Enter') {
-    event.preventDefault();
-    sortDropdown.classList.toggle('collapsed');
-    sortIcon.classList.toggle('rotate');
-
-    if (sortDropdown.classList.contains('collapsed')) {
-      sortOptions.forEach(option => {
-        option.setAttribute('tabindex', '-1');
-      });
-    } else {
-      sortOptions.forEach(option => {
-        option.setAttribute('tabindex', '0');
-      });
-    }
-  }
-});
-
-
-
-// Ajoute l'événement "keydown" pour fermer la liste avec la touche "Escape"
-window.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && !sortDropdown.classList.contains('collapsed')) {
-    sortDropdown.classList.add('collapsed');
-    sortIcon.classList.remove('rotate');
-  }
-});
-
-// Ajoute l'événement "click" pour fermer la liste en cliquant en dehors de celle-ci
-window.addEventListener('click', (event) => {
-  if (!sortDropdown.contains(event.target)) {
-    sortDropdown.classList.add('collapsed');
-    sortIcon.classList.remove('rotate');
-  }
-});
-// Fermer la liste quand on sort de la liste avec la touche "Tab"
-sortOptions[sortOptions.length - 1].addEventListener('keydown', (event) => {
-  if (event.key === 'Tab' && !event.shiftKey) {
-    sortDropdown.classList.add('collapsed');
-    sortIcon.classList.remove('rotate');
-  }
-});
 
 function fetchMedia() {
   const url = new URL(window.location.href);
@@ -324,7 +202,10 @@ function fetchMedia() {
       renderMedia(); 
 
       const totalLikes = getTotalLikes(media);
-      totalLikesEl.innerHTML = `${totalLikes} <i class="fas fa-heart"></i>`;
+      setInnerHTML(totalLikesEl, `${totalLikes} <i class="fas fa-heart"></i>`);
     });
 }
 fetchMedia();
+
+export { renderMedia };
+export { media };
