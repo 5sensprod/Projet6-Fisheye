@@ -9,13 +9,11 @@ const id = url.searchParams.get("id");
 
 // Affiche les informations du photographe par rapport à l'id
 async function renderPhotographerInfo() {
+  const url = new URL(window.location.href);
+  const id = url.searchParams.get("id");
+
   try {
     const photographer = await getPhotographerById(id);
-
-    // Vérifie si le photographe a été trouvé
-    if (!photographer) {
-      throw new Error("Photographer not found");
-    }
 
     photographerName = photographer.name; // Définit la variable globale photographerName
 
@@ -58,13 +56,9 @@ async function renderPhotographerInfo() {
 
   } catch (error) {
     console.error(error);
-    // Vérifie si l'erreur est due à un photographe introuvable (erreur 404)
-    if (error.message === "Photographer not found") {
-      // Redirige l'utilisateur vers la page 404
-      window.location.href = "404.html";
-    }
   }
 }
+
 renderPhotographerInfo();
 
 // Récupère les données de médias pour le photographe actuel et les affiche
