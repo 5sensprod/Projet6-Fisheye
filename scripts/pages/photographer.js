@@ -17,6 +17,8 @@ async function renderPhotographerInfo() {
       throw new Error("Photographer not found");
     }
 
+    photographerName = photographer.name; // Définit la variable globale photographerName
+
     // Crée un élément HTML pour la photo de profil
     const portraitImage = document.createElement('img');
     const portraitUrl = `assets/photographers/${photographer.portrait}`;
@@ -66,7 +68,7 @@ renderPhotographerInfo();
 
 // Récupère les données de médias pour le photographe actuel et les affiche
 let media = [];
-
+let photographerName;
 async function loadPhotographerMedia() {
   try {
     const url = new URL(window.location.href);
@@ -79,6 +81,9 @@ async function loadPhotographerMedia() {
 
     // Calcul et affichage du nombre total de likes pour les médias du photographe
     setInnerHTML(totalLikesEl, `${totalLikes} <i class="fas fa-heart"></i>`);
+
+    // Ajout d'un attribut aria-label pour le nombre total de likes
+    totalLikesEl.setAttribute("aria-label", `${photographerName} cumule ${totalLikes} likes`);
 
     // Tri des médias par popularité par défaut
     sortMedia(media, 'popularity');

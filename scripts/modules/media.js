@@ -2,6 +2,8 @@ import { mediaFactory } from '../factories/mediaFactory.js';
 import { createNode, setAttributes, addClass, appendNode, toggleClass } from '../utils/domUtils.js';
 import { createMediaLink } from './lightbox.js';
 import { getTotalLikes, updateTotalLikes } from './likes.js';
+import { getPhotographerById } from '../data/photographersFetcher.js';
+
 
 const mediaUrl = 'assets/medias';
 const imageType = 'image';
@@ -13,6 +15,16 @@ const totalLikesEl = document.querySelector("#total-likes");
 const mediaInfoContainer = createNode("div");
 const likesCountTemplate = createNode("span");
 addClass(likesCountTemplate, "likes-count", "media-likes-icon");
+
+// Récupère le nom par l'id du photographe dans l'url
+let photographerName;
+async function displayName() {
+  const url = new URL(window.location.href);
+  const id = url.searchParams.get("id");
+  const photographer = await getPhotographerById(id);
+  photographerName = photographer.name;
+}
+await displayName();
 
 const createMediaInfo = (media) => {
   const mediaInfo = createNode("div");
@@ -113,6 +125,9 @@ function createLikesButton(media, likesCount) {
 
     totalLikes = getTotalLikes();
     updateTotalLikes();
+    
+    // Met à jour aria-label pour le nombre total de likes
+    totalLikesEl.setAttribute("aria-label", `${photographerName} cumule ${totalLikes} likes`);
   });
 
   return likesButton;
