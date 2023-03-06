@@ -2,6 +2,7 @@ function photographerFactory(data) {
   const { name, id, city, country, tagline, price, portrait } = data;
   const picture = `assets/photographers/${portrait}`;
 
+  // Création des cards photographe
   function getUserCardDOM() {
     const article = document.createElement('article');
     article.setAttribute('role', 'region');
@@ -15,10 +16,9 @@ function photographerFactory(data) {
         window.location.href = `photographer.html?id=${data.id}`;
       }
     });
-    // Création d'un lien vers la page du photographe
+    // Création d'un lien vers la page du photographe avec l'id du photographe
     figure.addEventListener('click', function () {
       window.location.href = `photographer.html?id=${data.id}`;
-      // window.location.href = `photographer.html?id=${data.id}&name=${encodeURIComponent(data.name)}`;
     });
 
     const img = document.createElement('img');

@@ -7,7 +7,7 @@ import { sortMedia } from '../modules/sort.js';
 const url = new URL(window.location.href);
 const id = url.searchParams.get("id");
 
-// Affiche les informations du photographe par rapport à l'id dans photograph-header
+// Affiche les informations du photographe par rapport à l'id
 async function renderPhotographerInfo() {
   try {
     const photographer = await getPhotographerById(id);
@@ -71,11 +71,16 @@ async function loadPhotographerMedia() {
   try {
     const url = new URL(window.location.href);
     const photographerId = url.searchParams.get("id");
+
+    // Récupération des données des médias du photographe depuis l'API
     const mediaData = await getPhotographerMedia(photographerId);
     media = mediaData.map((m) => createMediaFromData(m, photographerId));
     const totalLikes = getTotalLikes(media);
+
+    // Calcul et affichage du nombre total de likes pour les médias du photographe
     setInnerHTML(totalLikesEl, `${totalLikes} <i class="fas fa-heart"></i>`);
-    // Tri par popularité par défaut
+
+    // Tri des médias par popularité par défaut
     sortMedia(media, 'popularity');
   } catch (error) {
     console.error(error);

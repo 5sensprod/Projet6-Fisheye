@@ -1,3 +1,5 @@
+// Description :  fonctions utilitaires pour manipuler le DOM
+
 export function createNode(element) {
     return document.createElement(element);
 }

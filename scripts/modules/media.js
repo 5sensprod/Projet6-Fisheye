@@ -64,7 +64,6 @@ function createMediaContent(media) {
     });
     appendNode(mediaContent, description);
   }
-
   return mediaContent;
 }
 
@@ -94,7 +93,9 @@ function createLikesButton(media, likesCount) {
   appendNode(likesButton, likesIcon);
 
   likesButton.addEventListener("click", function () {
+    // Inverse l'état du bouton "isLiked"
     media.isLiked = !media.isLiked;
+    // Ajoute ou supprime la classe "liked" pour modifier l'apparence du bouton de likes et du compteur de likes
     toggleClass(likesIcon, 'liked');
     toggleClass(likesCount, 'liked');
 
