@@ -1,13 +1,11 @@
 import { getPhotographerById } from '../data/photographersFetcher.js';
 import { disableTabNavigation, navElements, closeModal } from './navigation-utils.js';
 
-
 // Elements du DOM
 const modal = document.getElementById("contact_modal");
 const closeButton = document.getElementById('close_modal_button');
 const contactButton = document.querySelector('.contact_button');
 const submitButton = document.querySelector('.submit_button');
-
 
 // Fonction d'affichage de la modale
 function displayModal() {
@@ -26,7 +24,6 @@ function displayModal() {
       modalContainer.setAttribute('aria-hidden', 'false');
       modalContainer.removeAttribute('aria-modal');
       modalContainer.removeAttribute('tabindex');
-
     });
 
   // Afficher la modale
@@ -36,8 +33,8 @@ function displayModal() {
   // Ajouter la classe "modal-open" à la "page-content"
   const pageContent = document.querySelector(".page-content");
   pageContent.classList.add("modal-open");
-
 }
+
 contactButton.addEventListener('click', displayModal);
 
 // Fermer la modale en cliquant en dehors de la modale
@@ -69,7 +66,6 @@ submitButton.addEventListener("click", submitForm);
 // Gestion de la soumission du formulaire
 
 // Sélection des éléments du formulaire
-// const form = document.querySelector('form');
 const lastnameInput = document.querySelector('#lastname');
 const firstnameInput = document.querySelector('#firstname');
 const emailInput = document.querySelector('#email');
@@ -188,4 +184,3 @@ messageInput.addEventListener("input", function () {
     error.textContent = "";
   }
 });
-
