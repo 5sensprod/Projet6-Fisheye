@@ -4,11 +4,11 @@
 
 figure.card_portrait {
     transition: filter 0.3s ease;
-  }
-  
-  figure.card_portrait:hover {
+}
+
+figure.card_portrait:hover {
     filter: grayscale(80%);
-  }
+}
 
 .photograph-header {
     display: flex;
@@ -96,7 +96,6 @@ figure.card_portrait {
 }
 
 .modal {
-
     position: fixed;
     top: 50%;
     left: 50%;
