@@ -45,6 +45,7 @@ function photographerFactory(data) {
 
     const figcaption = document.createElement('figcaption');
     figcaption.textContent = `Photographe ${name}`;
+    figcaption.classList.add('sr-only');
 
     figure.appendChild(img);
     figure.appendChild(h2);
