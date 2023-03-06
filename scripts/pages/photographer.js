@@ -51,6 +51,7 @@ async function renderPhotographerInfo() {
     // Affiche le prix journalier
     const priceElement = document.getElementById('daily-price');
     priceElement.textContent = `${photographer.price} € / jour`;
+    priceElement.setAttribute('aria-label', `Le tarif journalier de ${photographer.name} est de ${photographer.price} euros`);
 
     // Donne le titre de la page en fonction du nom du photographe
     document.title = `${photographer.name} - Fisheye`;
