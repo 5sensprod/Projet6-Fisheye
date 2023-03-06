@@ -71,6 +71,16 @@ async function loadPhotographerMedia() {
 
     // Récupération des données des médias du photographe depuis l'API
     const mediaData = await getPhotographerMedia(photographerId);
+
+    // Vérification si chaque média existe et suppression des médias inexistants
+    for (let i = 0; i < mediaData.length; i++) {
+      const mediaExists = await doesMediaExist(mediaData[i], photographerId);
+      if (!mediaExists) {
+        mediaData.splice(i, 1);
+        i--;
+      }
+    }
+
     media = mediaData.map((m) => createMediaFromData(m, photographerId));
     const totalLikes = getTotalLikes(media);
 
@@ -82,6 +92,10 @@ async function loadPhotographerMedia() {
 
     // Tri des médias par popularité par défaut
     sortMedia(media, 'popularity');
+
+    // Afficher les médias restants
+    renderMedia(media);
+
   } catch (error) {
     console.error(error);
   }
@@ -99,3 +113,16 @@ function renderMedia(media) {
 }
 
 export { renderMedia, media }
+
+
+// Vérifie si le média existe
+async function doesMediaExist(media, photographerId) {
+  const mediaUrl = `assets/medias/${photographerId}/${media.image || media.video}`;
+  try {
+    const response = await fetch(mediaUrl, { method: 'HEAD' });
+    return response.ok;
+  } catch (error) {
+    console.error(error);
+    return false;
+  }
+}
