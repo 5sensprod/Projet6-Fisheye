@@ -11,6 +11,7 @@ const lightboxTitle = document.querySelector(".lightbox-title");
 const lightboxPrev = document.querySelector(".lightbox-prev");
 const lightboxNext = document.querySelector(".lightbox-next");
 
+// Crée un lien vers le média
 const createMediaLink = (media) => {
   const mediaLink = createNode("a");
   addClass(mediaLink, "media-link");
