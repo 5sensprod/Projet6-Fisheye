@@ -1,6 +1,5 @@
 import { getPhotographerById } from '../data/photographersFetcher.js';
 
-
 const url = new URL(window.location.href);
 const id = url.searchParams.get("id");
 
