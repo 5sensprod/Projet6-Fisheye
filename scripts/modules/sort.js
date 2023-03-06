@@ -1,13 +1,19 @@
 // Importer les fonctions nécessaires
-import { renderMedia, media } from '../factories/media.js';
+import { media } from '../pages/photographer.js';
+import { renderMedia } from '../pages/photographer.js';
 import { setAttributes, addClass, removeClass } from '../utils/domUtils.js';
 
 // Sélectionner les éléments HTML nécessaires
 const sortOptions = document.querySelectorAll('.sort_option');
 const sortDropdown = document.querySelector('.sort_dropdown');
 const sortIcon = document.querySelector('.sort_icon');
-const defaultSortOption = document.querySelector('.sort_option-active');
 const sortText = document.querySelector('.sort_dropdown span');
+
+// Initialiser la variable pour stocker l'état actuel de la liste déroulante
+let isCollapsed = sortDropdown.classList.contains('collapsed');
+
+// Initialiser les attributs "tabindex" des options de tri en fonction de l'état initial de la liste déroulante
+sortOptions.forEach(option => setAttributes(option, { 'tabindex': isCollapsed ? '-1' : '0' }));
 
 // Fonction pour trier les médias en fonction du type de tri sélectionné
 function sortMedia(media, sortType) {
@@ -21,9 +27,7 @@ function sortMedia(media, sortType) {
     media.sort(sorts[sortType]);
     renderMedia(media);
 }
-
-// Initialiser le texte de tri par défaut
-sortText.textContent = defaultSortOption.textContent;
+export { sortMedia }
 
 // Fonction pour activer une option de tri et trier les médias en conséquence
 function activateOption(option, media) {
@@ -39,6 +43,7 @@ function activateOption(option, media) {
 // Initialiser les attributs "tabindex" des options de tri en fonction de l'état initial de la liste déroulante
 sortOptions.forEach(option => setAttributes(option, { 'tabindex': sortDropdown.classList.contains('collapsed') ? '-1' : '0' }));
 
+// Gestions des événements
 // Ajouter l'événement "keydown" à la liste déroulante pour permettre l'ouverture/fermeture de la liste avec la touche "Enter"
 sortDropdown.addEventListener('keydown', event => {
     if (event.key === 'Enter') {
@@ -86,4 +91,13 @@ sortOptions.forEach(option => {
             activateOption(option, media);
         }
     });
+});
+
+// Fermer la liste de tri avec la touche "Esc" quand on est dedans
+sortDropdown.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+        addClass(sortDropdown, 'collapsed');
+        removeClass(sortIcon, 'rotate');
+        sortOptions.forEach(option => setAttributes(option, { 'tabindex': sortDropdown.classList.contains('collapsed') ? '-1' : '0' }));
+    }
 });

@@ -1,5 +1,3 @@
-import { getPhotographers } from '../data/photographersFetcher.js';
-
 function photographerFactory(data) {
   const { name, id, city, country, tagline, price, portrait } = data;
   const picture = `assets/photographers/${portrait}`;
@@ -17,12 +15,11 @@ function photographerFactory(data) {
         window.location.href = `photographer.html?id=${data.id}`;
       }
     });
-
+    // Création d'un lien vers la page du photographe
     figure.addEventListener('click', function () {
-      window.location.href = `photographer.html?id=${data.id}&name=${encodeURIComponent(data.name)}`;
+      window.location.href = `photographer.html?id=${data.id}`;
+      // window.location.href = `photographer.html?id=${data.id}&name=${encodeURIComponent(data.name)}`;
     });
-
-
 
     const img = document.createElement('img');
     img.setAttribute('src', picture);
@@ -60,17 +57,4 @@ function photographerFactory(data) {
   return { name, picture, city, country, tagline, price, id, getUserCardDOM };
 }
 
-async function displayData() {
-  const photographers = await getPhotographers();
-
-  const photographersSection = document.querySelector('.photographer_section');
-
-  photographers.forEach((photographer) => {
-    const photographerModel = photographerFactory(photographer);
-    const userCardDOM = photographerModel.getUserCardDOM();
-    photographersSection.appendChild(userCardDOM);
-  });
-}
-
-displayData();
-
+export { photographerFactory }
