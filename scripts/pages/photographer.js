@@ -9,9 +9,6 @@ const id = url.searchParams.get("id");
 
 // Affiche les informations du photographe par rapport à l'id
 async function renderPhotographerInfo() {
-  const url = new URL(window.location.href);
-  const id = url.searchParams.get("id");
-
   try {
     const photographer = await getPhotographerById(id);
 

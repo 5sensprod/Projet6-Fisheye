@@ -2,12 +2,11 @@ import { getPhotographerById } from '../data/photographersFetcher.js';
 
 const url = new URL(window.location.href);
 const id = url.searchParams.get("id");
+let photographerName;
 
-// Vérifie si l'ID existe
-if (id) {
-  let photographerName;
-
-  async function displayName() {
+async function checkIdValidity() {
+  // Vérifie si l'ID existe
+  if (id) {
     const photographer = await getPhotographerById(id);
 
     // Vérifie si le photographe existe
@@ -17,11 +16,10 @@ if (id) {
     }
 
     photographerName = photographer.name;
+
+  } else {
+    window.location.href = "404.html";
   }
-
-  await displayName();
-
-} else {
-  window.location.href = "404.html";
 }
-export let photographerName;
+export { photographerName };
+checkIdValidity();

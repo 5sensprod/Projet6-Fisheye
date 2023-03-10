@@ -108,7 +108,7 @@ function createLikesButton(media, likesCount) {
     if (parent) {
       likesCount.setAttribute("aria-label", `${media.title} à ${media.likes} j'aime`);
     } else {
-      appendNode(likesButtonContainer, likesCount);
+      appendNode(likesCount);
       likesCount.setAttribute("aria-label", `${media.title} à ${media.likes} j'aime`);
     }
 

@@ -105,7 +105,7 @@ function showLightbox(media) {
   });
 
   // Affiche le média suivant quand l'utilisateur clique sur le bouton suivant
-  lightboxNext.addEventListener("click", (e) => {
+  lightboxNext.addEventListener("click", () => {
     currentIndex = currentIndex < mediaList.length - 1 ? currentIndex + 1 : 0;
     const nextMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
     if (nextMedia.tagName.toLowerCase() === "video") {
@@ -119,7 +119,7 @@ function showLightbox(media) {
   });
 
   // Affiche le média précédent quand l'utilisateur clique sur le bouton précédent
-  lightboxPrev.addEventListener("click", (e) => {
+  lightboxPrev.addEventListener("click", () => {
     currentIndex = (currentIndex > 0) ? (currentIndex - 1) : (mediaList.length - 1);
     const prevMedia = mediaList[currentIndex].querySelector("img, video").cloneNode(true);
 
@@ -137,7 +137,7 @@ function showLightbox(media) {
   // Gère les événements du clavier pour passer au média suivant ou précédent
   function handleKeyboardEvent(e) {
     switch (e.key) {
-      case 'ArrowLeft':
+      case 'ArrowLeft': {
         if (currentIndex > 0) {
           currentIndex--;
         } else {
@@ -153,8 +153,9 @@ function showLightbox(media) {
         const prevMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
         lightboxTitle.textContent = prevMediaTitle;
         break;
-
-      case 'ArrowRight':
+      }
+  
+      case 'ArrowRight': {
         if (currentIndex < mediaList.length - 1) {
           currentIndex++;
         } else {
@@ -170,12 +171,12 @@ function showLightbox(media) {
         const nextMediaTitle = mediaList[currentIndex].querySelector(".media-title").textContent;
         lightboxTitle.textContent = nextMediaTitle;
         break;
-
+      }
+  
       case 'Escape':
         // ferme la lightbox
         closeLightbox(lightbox, navElements);
-        break
-        ;
+        break;
     }
   }
 

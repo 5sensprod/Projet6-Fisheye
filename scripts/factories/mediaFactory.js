@@ -1,5 +1,5 @@
 import { appendNode } from '../utils/domUtils.js';
-import { totalLikes, createMediaItem, createMediaLink, createMediaContent, createMediaInfo, getTotalLikes } from '../modules/media.js';
+import { createMediaItem, createMediaLink, createMediaContent, createMediaInfo } from '../modules/media.js';
 
 // Définit une fonction factory pour les objets de média
 function mediaFactory(id, title, image, likes, date, price, photographerId, type) {
@@ -23,7 +23,7 @@ function mediaFactory(id, title, image, likes, date, price, photographerId, type
         const likesCountSpan = document.querySelector(`.media[data-id="${this.id}"] .likes-count`);
         likesCountSpan.textContent = likesCount;
         likesCountSpan.setAttribute("aria-label", `${this.title} à ${likesCount} j'aime`);
-        totalLikes = getTotalLikes(mediaList);
+        
     }
     // Représente l'objet de média avec ses propriétés et méthodes
     return { id, title, image, likes, date, price, photographerId, type, isLiked: false, render, renderLikes };
